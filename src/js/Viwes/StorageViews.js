@@ -1,7 +1,7 @@
 class StorageViews {
 	static storageTypeId = 'storageType';
 	static storageSizeId = 'storageSize';
-	static storageBrandId = 'storageModel';
+	static storageBrandId = 'storageBrand';
 	static storageModelId = 'storageModel';
 
 	/**
