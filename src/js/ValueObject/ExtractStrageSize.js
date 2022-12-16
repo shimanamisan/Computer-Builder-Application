@@ -1,5 +1,5 @@
-class StrageSize {
-	static #values;
+class ExtractStrageSize {
+	#values;
 
 	// 考え方
 	// 1. 特定の文字列が含まれているか検索する. 戻り値は配列
@@ -49,4 +49,4 @@ class StrageSize {
 	}
 }
 
-export default StrageSize;
+export default ExtractStrageSize;
