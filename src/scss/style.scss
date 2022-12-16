@@ -1,0 +1,36 @@
+@import '~bootstrap/scss/bootstrap';
+
+.p-builder {
+  &__container {
+    background-color: #dbdbff;
+  }
+}
+.btn-container {
+  width: 25%;
+  &--full {
+    width: 100%;
+  }
+}
+
+.title-text {
+  display: inline-block;
+}
+
+.c-input {
+  &__search {
+    cursor: pointer;
+  }
+}
+
+.c-profile-card {
+  & p {
+    margin-bottom: 0.6rem;
+  }
+}
+
+.p-header {
+  &__builder {
+    color: #fff;
+    background-color: #3366cc;
+  }
+}
