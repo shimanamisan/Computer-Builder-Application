@@ -8,6 +8,7 @@ import MemoryViews from './Viwes/MemoryViews';
 import StorageViews from './Viwes/StorageViews';
 import Button from './Viwes/Button';
 import InputChange from './Controller/EventController/InputChange';
+import ButtonClick from './Controller/EventController/ButtonClick';
 import StrageSectionController from './Controller/StrageSectionController';
 import AddOptionElement from './Controller/AddOptionElement';
 
@@ -36,6 +37,8 @@ class App {
 		InputChange.addEvent(document.getElementById(GpuViews.gpuBrandId), AddOptionElement.gpuModelElements);
 		InputChange.addEvent(document.getElementById(MemoryViews.memoryQuantityId), AddOptionElement.memoryBrandElements);
 		InputChange.addEvent(document.getElementById(StorageViews.storageTypeId), StrageSectionController.strageSizeElements);
+
+		ButtonClick.addEvent(document.getElementById(Button.addPcButtonId),);
 	}
 }
 
