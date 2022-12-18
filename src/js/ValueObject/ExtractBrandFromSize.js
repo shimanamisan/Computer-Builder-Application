@@ -17,11 +17,11 @@ class ExtractBrandFromSize {
 			}
 		}
 
-		this.values = Object.keys(hashMap);
+		this.#values = Object.keys(hashMap);
 	}
 
 	getBrands() {
-		return this.values;
+		return this.#values;
 	}
 }
 

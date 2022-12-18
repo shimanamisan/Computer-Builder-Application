@@ -41,11 +41,11 @@ class ExtractStrageSize {
 		const addUnitStrTB = tbNumLists.map(x => x.toString() + 'TB');
 		const addUnitStrGB = tbNumLists.map(x => x.toString() + 'GB');
 
-		this.values = addUnitStrTB.concat(addUnitStrGB);
+		this.#values = addUnitStrTB.concat(addUnitStrGB);
 	}
 
 	getStrageSize() {
-		return this.values;
+		return this.#values;
 	}
 }
 
