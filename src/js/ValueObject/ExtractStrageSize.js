@@ -1,5 +1,5 @@
-class StrageSize {
-	static #values;
+class ExtractStrageSize {
+	#values;
 
 	// 考え方
 	// 1. 特定の文字列が含まれているか検索する. 戻り値は配列
@@ -41,12 +41,12 @@ class StrageSize {
 		const addUnitStrTB = tbNumLists.map(x => x.toString() + 'TB');
 		const addUnitStrGB = tbNumLists.map(x => x.toString() + 'GB');
 
-		this.values = addUnitStrTB.concat(addUnitStrGB);
+		this.#values = addUnitStrTB.concat(addUnitStrGB);
 	}
 
 	getStrageSize() {
-		return this.values;
+		return this.#values;
 	}
 }
 
-export default StrageSize;
+export default ExtractStrageSize;

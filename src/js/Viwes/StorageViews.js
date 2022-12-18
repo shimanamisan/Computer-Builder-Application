@@ -1,7 +1,7 @@
 class StorageViews {
 	static storageTypeId = 'storageType';
 	static storageSizeId = 'storageSize';
-	static storageBrandId = 'storageModel';
+	static storageBrandId = 'storageBrand';
 	static storageModelId = 'storageModel';
 
 	/**
@@ -16,7 +16,7 @@ class StorageViews {
         </div>
         <div class="d-md-flex justify-content-center">
           <div class="p-2">HDD or SSD</div>
-          <div class="col-1">
+          <div class="col-md-1 col-2">
             <select class="form-select ms-md-2" name="storageType" id="storageType">
             </select>
           </div>

@@ -16,7 +16,7 @@ class MemoryViews {
     <div class="d-md-flex justify-content-center">
       <div class="p-2">How many?</div>
       <!-- form-selectクラスでwidth:100%;が優先されるので、col-1とサイズを指定する場合はdivタグで囲む必要がある -->
-      <div class="col-1">
+      <div class="col-md-1 col-2">
         <select class="form-select ms-md-2" name="memoryQuantity" id="memoryQuantity">
           <option selected value="-">-</option>
           <option value="1">1</option>
