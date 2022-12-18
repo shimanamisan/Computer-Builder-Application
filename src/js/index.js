@@ -9,11 +9,16 @@ import StorageViews from './Viwes/StorageViews';
 import Button from './Viwes/Button';
 import InputChange from './Controller/EventController/InputChange';
 import ButtonClick from './Controller/EventController/ButtonClick';
-import StrageSectionController from './Controller/StrageSectionController';
-import AddOptionElement from './Controller/AddOptionElement';
+import StorageSectionController from './Controller/StorageSectionController';
+import MemorySectionController from './Controller/MemorySectionController';
+import CreateComputerController from './Controller/CreateComputerController';
+import ComputerEntity from './Entity/ComputerEntity';
+import CpuSectionController from './Controller/CpuSectionController';
+import GpuSectionConttoller from './Controller/GpuSectionConttoller';
 
 class App {
 	static async createTopView() {
+		window.ComputerEntity = new ComputerEntity();
 		const container = document.createElement('div');
 		container.classList.add('col-md-8', 'd-flex', 'flex-column', 'm-auto');
 		container.innerHTML += CpuViews.createStringHTML();
@@ -26,19 +31,19 @@ class App {
 		target.append(container);
 
 		// cpuのAPIデータを取得して option 要素に追加する
-		await AddOptionElement.cpuBrandElements();
+		await CpuSectionController.cpuBrandElements();
 		// cpuのBrandを切り替えたら同じブランドのgpuを取得する処理を登録する
-		InputChange.addEvent(document.getElementById(CpuViews.cpuBrandId), AddOptionElement.cpuModelElements);
+		InputChange.addEvent(document.getElementById(CpuViews.cpuBrandId), CpuSectionController.cpuModelElements);
 		// cpuのAPIデータを取得して option 要素に追加する
-		await AddOptionElement.gpuBrandElements();
+		await GpuSectionConttoller.gpuBrandElements();
 
-		await StrageSectionController.strageTypeElement();
+		await StorageSectionController.strageTypeElement();
 
-		InputChange.addEvent(document.getElementById(GpuViews.gpuBrandId), AddOptionElement.gpuModelElements);
-		InputChange.addEvent(document.getElementById(MemoryViews.memoryQuantityId), AddOptionElement.memoryBrandElements);
-		InputChange.addEvent(document.getElementById(StorageViews.storageTypeId), StrageSectionController.strageSizeElements);
+		InputChange.addEvent(document.getElementById(GpuViews.gpuBrandId), GpuSectionConttoller.gpuModelElements);
+		InputChange.addEvent(document.getElementById(MemoryViews.memoryQuantityId), MemorySectionController.memoryBrandElements);
+		InputChange.addEvent(document.getElementById(StorageViews.storageTypeId), StorageSectionController.strageSizeElements);
 
-		ButtonClick.addEvent(document.getElementById(Button.addPcButtonId),);
+		ButtonClick.addEvent(document.getElementById(Button.addPcButtonId), CreateComputerController.create);
 	}
 }
 
