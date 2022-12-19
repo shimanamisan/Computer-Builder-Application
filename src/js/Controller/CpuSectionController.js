@@ -1,12 +1,12 @@
 import GetApiData from '../Model/GetApiData';
 import CpuViews from '../Viwes/CpuViews';
 import InputChange from './EventController/InputChange';
-import ComputerEntity from '../Entity/ComputerEntity';
+import CpuEntity from '../Entity/CpuEntity';
 
 class CpuSectionController {
 	/**
-   *
-   */
+	 *
+	 */
 	static async cpuBrandElements() {
 		const apiData = await GetApiData.execution('cpu');
 		const element = document.getElementById(CpuViews.cpuBrandId);
@@ -22,9 +22,9 @@ class CpuSectionController {
 	}
 
 	/**
-   *
-   * @param {*} event
-   */
+	 *
+	 * @param {*} event
+	 */
 	static async cpuModelElements(event) {
 		const brandName = event.target.value;
 		const apiData = await GetApiData.execution('cpu');
@@ -46,17 +46,19 @@ class CpuSectionController {
 	}
 
 	/**
-   * 
-   * @param {*} cpuBrandData 
-   * @param {*} event 
-   * @returns 
-   */
+	 *
+	 * @param {*} cpuBrandData
+	 * @param {*} event
+	 * @returns
+	 */
 	static addComputerEntity(cpuBrandData, event) {
 		if (event.target.value === '-') return;
 
 		const selectCpuData = cpuBrandData.filter(x => (x.Model === event.target.value ? x : ''));
 
-		window.ComputerEntity = new ComputerEntity(selectCpuData, 'cpu');
+		window.CpuEntity = new CpuEntity(selectCpuData, window.CpuEntity);
+
+		console.log(window.CpuEntity);
 	}
 }
 

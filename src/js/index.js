@@ -12,13 +12,20 @@ import ButtonClick from './Controller/EventController/ButtonClick';
 import StorageSectionController from './Controller/StorageSectionController';
 import MemorySectionController from './Controller/MemorySectionController';
 import CreateComputerController from './Controller/CreateComputerController';
-import ComputerEntity from './Entity/ComputerEntity';
 import CpuSectionController from './Controller/CpuSectionController';
 import GpuSectionConttoller from './Controller/GpuSectionConttoller';
+import CpuEntity from './Entity/CpuEntity';
+import GpuEntity from './Entity/GpuEntity';
+import MemoryEntity from './Entity/MemoryEntity';
+import StorageEntity from './Entity/StorageEntity';
 
 class App {
 	static async createTopView() {
-		window.ComputerEntity = new ComputerEntity();
+		window.CpuEntity = new CpuEntity();
+		window.GpuEntity = new GpuEntity();
+		window.MemoryEntity = new MemoryEntity();
+		window.StorageEntity = new StorageEntity();
+
 		const container = document.createElement('div');
 		container.classList.add('col-md-8', 'd-flex', 'flex-column', 'm-auto');
 		container.innerHTML += CpuViews.createStringHTML();

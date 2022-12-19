@@ -1,11 +1,12 @@
 import GetApiData from '../Model/GetApiData';
 import GpuViews from '../Viwes/GpuViews';
-import ComputerEntity from '../Entity/ComputerEntity';
+import InputChange from './EventController/InputChange';
+import GpuEntity from '../Entity/GpuEntity';
 
 class GpuSectionConttoller {
 	/**
-   *
-   */
+	 *
+	 */
 	static async gpuBrandElements() {
 		const apiData = await GetApiData.execution('gpu');
 		const element = document.getElementById(GpuViews.gpuBrandId);
@@ -24,22 +25,42 @@ class GpuSectionConttoller {
 	}
 
 	/**
-   *
-   */
+	 *
+	 */
 	static async gpuModelElements(event) {
 		const brandName = event.target.value;
 		const apiData = await GetApiData.execution('gpu');
 
-		const result = apiData.filter(x => (x.Brand === brandName ? x : ''));
+		const gpuBrandData = apiData.filter(x => (x.Brand === brandName ? x : ''));
 
 		const element = document.getElementById(GpuViews.gpuModelId);
 
 		// プルダウンを選択し直した際に一旦初期化
 		element.innerHTML = '<option selected value="-">-</option>';
 
-		for (let i = 0; i < result.length; i++) {
-			element.innerHTML += `<option value="${result[i].Model}">${result[i].Model}</option>`;
+		for (let i = 0; i < gpuBrandData.length; i++) {
+			element.innerHTML += `<option value="${gpuBrandData[i].Model}">${gpuBrandData[i].Model}</option>`;
 		}
+
+		InputChange.addEvent(element, function (event) {
+			GpuSectionConttoller.addComputerEntity(gpuBrandData, event);
+		});
+	}
+
+	/**
+	 *
+	 * @param {*} gpuBrandData
+	 * @param {*} event
+	 * @returns
+	 */
+	static addComputerEntity(gpuBrandData, event) {
+		if (event.target.value === '-') return;
+
+		const selectGpuData = gpuBrandData.filter(x => (x.Model === event.target.value ? x : ''));
+
+		window.GpuEntity = new GpuEntity(selectGpuData, window.GpuEntity);
+
+		console.log(window.GpuEntity);
 	}
 }
 

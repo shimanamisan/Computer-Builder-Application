@@ -2,11 +2,12 @@ import GetApiData from '../Model/GetApiData';
 import MemoryViews from '../Viwes/MemoryViews';
 import ExtractMemoryModel from '../ValueObject/ExtractMemoryModel';
 import InputChange from './EventController/InputChange';
+import MemoryEntity from '../Entity/MemoryEntity';
 
 class MemorySectionController {
 	/**
-   *
-   */
+	 *
+	 */
 	static async memoryBrandElements() {
 		const apiData = await GetApiData.execution('ram');
 
@@ -24,22 +25,42 @@ class MemorySectionController {
 	}
 
 	/**
-   *
-   * @returns
-   */
+	 *
+	 * @returns
+	 */
 	static async memoryModelElements() {
 		const apiData = await GetApiData.execution('ram');
-		const models = new ExtractMemoryModel(apiData);
-		const modelLists = models.getModel();
+		const memoryModel = new ExtractMemoryModel(apiData);
+		const memoryModelData = memoryModel.getModel();
 
 		const element = document.getElementById(MemoryViews.memoryModelId);
 		element.innerHTML = `<option selected value="-">-</option>`;
 
 		if (element.length === 0) return;
 
-		for (let i = 0; i < modelLists.length; i++) {
-			element.innerHTML += `<option value="${modelLists[i].Model}">${modelLists[i].Model}</option>`;
+		for (let i = 0; i < memoryModelData.length; i++) {
+			element.innerHTML += `<option value="${memoryModelData[i].Model}">${memoryModelData[i].Model}</option>`;
 		}
+
+		InputChange.addEvent(element, function (event) {
+			MemorySectionController.addComputerEntity(memoryModelData, event);
+		});
+	}
+
+	/**
+	 *
+	 * @param {*} memoryModelData
+	 * @param {*} event
+	 * @returns
+	 */
+	static addComputerEntity(memoryModelData, event) {
+		if (event.target.value === '-') return;
+
+		const selectMemoryModelData = memoryModelData.filter(x => (x.Model === event.target.value ? x : ''));
+
+		window.MemoryEntity = new MemoryEntity(selectMemoryModelData, window.MemoryEntity);
+
+		console.log(window.MemoryEntity);
 	}
 }
 
