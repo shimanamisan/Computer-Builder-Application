@@ -5,56 +5,58 @@ import InputChange from './EventController/InputChange';
 import MemoryEntity from '../Entity/MemoryEntity';
 
 class MemorySectionController {
+
 	/**
-	 *
-	 */
-	static async memoryBrandElements() {
+   * メモリの枚数の指定が変化したときに実行されるメソッド
+   */
+	static async addMemoryBrandElements() {
 		const apiData = await GetApiData.execution('ram');
 
 		// オブジェクトで重複した値を除去する
-		const uniqueData = Array.from(new Map(apiData.map(x => [x.Brand, x])).values());
+		const memoryBrandData = Array.from(new Map(apiData.map(x => [x.Brand, x])).values());
 
-		const element = document.getElementById(MemoryViews.memoryBrandId);
+		const memoryBrandEle = document.getElementById(MemoryViews.memoryBrandId);
 
-		element.innerHTML = `<option selected value="-">-</option>`;
-		for (let i = 0; i < uniqueData.length; i++) {
-			element.innerHTML += `<option value="${uniqueData[i].Brand}">${uniqueData[i].Brand}</option>`;
+		memoryBrandEle.innerHTML = `<option selected value="-">-</option>`;
+		for (let i = 0; i < memoryBrandData.length; i++) {
+			memoryBrandEle.innerHTML += `<option value="${memoryBrandData[i].Brand}">${memoryBrandData[i].Brand}</option>`;
 		}
-
-		InputChange.addEvent(element, MemorySectionController.memoryModelElements);
 	}
 
 	/**
-	 *
-	 * @returns
-	 */
-	static async memoryModelElements() {
+   *
+   * @returns
+   */
+	static async addMemoryModelElements() {
 		const apiData = await GetApiData.execution('ram');
 		const memoryModel = new ExtractMemoryModel(apiData);
 		const memoryModelData = memoryModel.getModel();
 
-		const element = document.getElementById(MemoryViews.memoryModelId);
-		element.innerHTML = `<option selected value="-">-</option>`;
+		const memoryModelEle = document.getElementById(MemoryViews.memoryModelId);
+		memoryModelEle.innerHTML = `<option selected value="-">-</option>`;
 
-		if (element.length === 0) return;
+		if (memoryModelEle.length === 0) return;
 
 		for (let i = 0; i < memoryModelData.length; i++) {
-			element.innerHTML += `<option value="${memoryModelData[i].Model}">${memoryModelData[i].Model}</option>`;
+			memoryModelEle.innerHTML += `<option value="${memoryModelData[i].Model}">${memoryModelData[i].Model}</option>`;
 		}
 
-		InputChange.addEvent(element, function (event) {
+		// InputChange.addEvent(memoryModelEle, { handleEvent: MemorySectionController.addComputerEntity });
+
+		memoryModelEle.addEventListener('change', function (event) {
 			MemorySectionController.addComputerEntity(memoryModelData, event);
 		});
 	}
 
 	/**
-	 *
-	 * @param {*} memoryModelData
-	 * @param {*} event
-	 * @returns
-	 */
+   *
+   * @param {*} memoryModelData
+   * @param {*} event
+   * @returns
+   */
 	static addComputerEntity(memoryModelData, event) {
 		if (event.target.value === '-') return;
+		if (memoryModelData.length === 0) return;
 
 		const selectMemoryModelData = memoryModelData.filter(x => (x.Model === event.target.value ? x : ''));
 
