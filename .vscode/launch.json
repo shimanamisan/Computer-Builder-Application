@@ -9,6 +9,11 @@
       "request": "launch",
       "name": "Chrome を起動してデバッガーを実行する",
       "url": "http://localhost:9000",
+      "skipFiles": [
+        // <node_internals>は、Node.jsの内部モジュールを指す
+        // この記述をすることで内部モジュールのデバッグの実行がスキップされるようになる
+        "<node_internals>/**"
+      ],
       "webRoot": "${workspaceFolder}"
     }
   ]
