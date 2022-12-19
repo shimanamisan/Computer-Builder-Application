@@ -57,8 +57,6 @@ class CpuSectionController {
 		const selectCpuData = cpuBrandData.filter(x => (x.Model === event.target.value ? x : ''));
 
 		window.CpuEntity = new CpuEntity(selectCpuData, window.CpuEntity);
-
-		console.log(window.CpuEntity);
 	}
 }
 

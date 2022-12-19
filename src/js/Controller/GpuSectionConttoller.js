@@ -59,8 +59,6 @@ class GpuSectionConttoller {
 		const selectGpuData = gpuBrandData.filter(x => (x.Model === event.target.value ? x : ''));
 
 		window.GpuEntity = new GpuEntity(selectGpuData, window.GpuEntity);
-
-		console.log(window.GpuEntity);
 	}
 }
 

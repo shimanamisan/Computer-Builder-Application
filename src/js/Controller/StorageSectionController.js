@@ -119,7 +119,6 @@ class StorageSectionController {
 
 		window.StorageEntity = new StorageEntity(selectStorageModelData, window.StorageEntity);
 
-		console.log(window.StorageEntity);
 	}
 }
 

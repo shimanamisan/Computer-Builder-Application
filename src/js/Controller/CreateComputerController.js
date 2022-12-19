@@ -1,4 +1,3 @@
-import GetApiData from '../Model/GetApiData';
 import CpuViews from '../Viwes/CpuViews';
 import GpuViews from '../Viwes/GpuViews';
 import MemoryViews from '../Viwes/MemoryViews';
@@ -21,23 +20,25 @@ class CreateComputerController {
 		// 全ての入力フォームが入力されていたら結果を出力する
 		if (
 			!CreateComputerController.isFormEmpty(cpuBrand) ||
-      !CreateComputerController.isFormEmpty(cpuModel) ||
-      !CreateComputerController.isFormEmpty(gpuBrand) ||
-      !CreateComputerController.isFormEmpty(gpuModel) ||
-      !CreateComputerController.isFormEmpty(memoryQuantity) ||
-      !CreateComputerController.isFormEmpty(memoryBrand) ||
-      !CreateComputerController.isFormEmpty(memoryModel) ||
-      !CreateComputerController.isFormEmpty(strageType) ||
-      !CreateComputerController.isFormEmpty(strageSize) ||
-      !CreateComputerController.isFormEmpty(strageBrand) ||
-      !CreateComputerController.isFormEmpty(strageModel)
+			!CreateComputerController.isFormEmpty(cpuModel) ||
+			!CreateComputerController.isFormEmpty(gpuBrand) ||
+			!CreateComputerController.isFormEmpty(gpuModel) ||
+			!CreateComputerController.isFormEmpty(memoryQuantity) ||
+			!CreateComputerController.isFormEmpty(memoryBrand) ||
+			!CreateComputerController.isFormEmpty(memoryModel) ||
+			!CreateComputerController.isFormEmpty(strageType) ||
+			!CreateComputerController.isFormEmpty(strageSize) ||
+			!CreateComputerController.isFormEmpty(strageBrand) ||
+			!CreateComputerController.isFormEmpty(strageModel)
 		) {
 			alert('全ての項目を入力して下さい。');
 			return;
 		}
-		const apiData = await GetApiData.execution('cpu');
 
-		console.log(apiData);
+		console.log(window.CpuEntity);
+		console.log(window.GpuEntity);
+		console.log(window.MemoryEntity);
+		console.log(window.StorageEntity);
 
 		return;
 	}

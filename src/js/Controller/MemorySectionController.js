@@ -58,9 +58,9 @@ class MemorySectionController {
 
 		const selectMemoryModelData = memoryModelData.filter(x => (x.Model === event.target.value ? x : ''));
 
-		window.MemoryEntity = new MemoryEntity(selectMemoryModelData, window.MemoryEntity);
+		console.log(selectMemoryModelData);
 
-		console.log(window.MemoryEntity);
+		window.MemoryEntity = new MemoryEntity(selectMemoryModelData, window.MemoryEntity);
 	}
 }
 
