@@ -16,11 +16,11 @@ module.exports = {
   rules: {
     'no-console': 'off',
     'prefer-const': 'error', // 更新をしない変数にconst以外が指定されていたらエラーが発生するルール
-    'no-import-assign': 'off', // import 文で作成した変数への代入のチェックを無効化
+    // 'no-import-assign': 'off', // import 文で作成した変数への代入のチェックを無効化
     indent: ['error', 'tab', { SwitchCase: 1 }],
     semi: ['error', 'always'],
   },
   parserOptions: {
-    sourceType: 'module', // import, export などのesmodulesの構文を利用してもエラーとならない
+    // sourceType: 'module', // import, export などのesmodulesの構文を利用してもエラーとならない
   },
 };
