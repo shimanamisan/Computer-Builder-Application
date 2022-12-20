@@ -7,12 +7,8 @@ class CpuEntity {
 		}
 
 		if (cpuEntity !== null && cpuEntity instanceof CpuEntity) {
-			cpuEntity.getCpu() === undefined ? this.#cpu = apiData : this.#cpu = cpuEntity.getCpu();
+			this.#cpu = apiData;
 		}
-	}
-
-	getCpu() {
-		return this.#cpu;
 	}
 }
 

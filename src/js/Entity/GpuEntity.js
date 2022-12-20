@@ -7,12 +7,8 @@ class GpuEntity {
 		}
 
 		if (gpuEntity !== null && gpuEntity instanceof GpuEntity) {
-			gpuEntity.getGpu() === undefined ? this.#gpu = apiData : this.#gpu = gpuEntity.getGpu();
+			this.#gpu = apiData;
 		}
-	}
-
-	getGpu() {
-		return this.#gpu;
 	}
 }
 

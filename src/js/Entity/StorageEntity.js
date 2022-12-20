@@ -7,12 +7,8 @@ class StorageEntity {
 		}
 
 		if (storageEntity !== null && storageEntity instanceof StorageEntity) {
-			storageEntity.getStorage() === undefined ? this.#storage = apiData : this.#storage = storageEntity.getStorage();
+			this.#storage = apiData;
 		}
-	}
-
-	getStorage() {
-		return this.#storage;
 	}
 }
 

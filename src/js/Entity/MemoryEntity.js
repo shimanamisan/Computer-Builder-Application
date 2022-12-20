@@ -7,12 +7,8 @@ class MemoryEntity {
 		}
 
 		if (memoryEntity !== null && memoryEntity instanceof MemoryEntity) {
-			memoryEntity.getMemory() === undefined ? this.#memory = apiData : this.#memory = memoryEntity.getMemory();
+			this.#memory = apiData;
 		}
-	}
-
-	getMemory() {
-		return this.#memory;
 	}
 }
 
