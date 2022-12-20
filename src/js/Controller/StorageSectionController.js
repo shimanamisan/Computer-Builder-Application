@@ -8,8 +8,8 @@ import StorageEntity from '../Entity/StorageEntity';
 
 class StorageSectionController {
 	/**
-	 *
-	 */
+   *
+   */
 	static async strageTypeElement() {
 		const hddType = await GetApiData.execution('hdd');
 		const ssdType = await GetApiData.execution('ssd');
@@ -34,9 +34,9 @@ class StorageSectionController {
 	}
 
 	/**
-	 *
-	 * @returns
-	 */
+   *
+   * @returns
+   */
 	static async storageSizeElements() {
 		const storageSizeEle = document.getElementById(StorageViews.storageSizeId);
 		const storageType = document.getElementById(StorageViews.storageTypeId).value.toLowerCase();
@@ -61,9 +61,9 @@ class StorageSectionController {
 	}
 
 	/**
-	 * ストレージのサイズが選択されたらBrand要素を追加する
-	 * @returns
-	 */
+   * ストレージのサイズが選択されたらBrand要素を追加する
+   * @returns
+   */
 	static async addStorageBrandElement() {
 		const storageType = document.getElementById(StorageViews.storageTypeId).value.toLowerCase();
 		const stoageSize = document.getElementById(StorageViews.storageSizeId).value;
@@ -83,8 +83,8 @@ class StorageSectionController {
 	}
 
 	/**
-	 *
-	 */
+   *
+   */
 	static async addStargeModelElement() {
 		const storageType = document.getElementById(StorageViews.storageTypeId).value.toLowerCase();
 		const storageSize = document.getElementById(StorageViews.storageSizeId).value;
@@ -107,18 +107,17 @@ class StorageSectionController {
 	}
 
 	/**
-	 *
-	 * @param {*} storageModelData
-	 * @param {*} event
-	 * @returns
-	 */
+   *
+   * @param {*} storageModelData
+   * @param {*} event
+   * @returns
+   */
 	static addComputerEntity(storageModelData, event) {
 		if (event.target.value === '-') return;
 
 		const selectStorageModelData = storageModelData.filter(x => (x.Model === event.target.value ? x : ''));
 
 		window.StorageEntity = new StorageEntity(selectStorageModelData, window.StorageEntity);
-
 	}
 }
 

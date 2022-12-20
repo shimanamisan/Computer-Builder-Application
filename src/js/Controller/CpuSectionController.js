@@ -5,8 +5,8 @@ import CpuEntity from '../Entity/CpuEntity';
 
 class CpuSectionController {
 	/**
-	 *
-	 */
+   *
+   */
 	static async cpuBrandElements() {
 		const apiData = await GetApiData.execution('cpu');
 		const element = document.getElementById(CpuViews.cpuBrandId);
@@ -22,9 +22,9 @@ class CpuSectionController {
 	}
 
 	/**
-	 *
-	 * @param {*} event
-	 */
+   *
+   * @param {*} event
+   */
 	static async cpuModelElements(event) {
 		const brandName = event.target.value;
 		const apiData = await GetApiData.execution('cpu');
@@ -46,11 +46,11 @@ class CpuSectionController {
 	}
 
 	/**
-	 *
-	 * @param {*} cpuBrandData
-	 * @param {*} event
-	 * @returns
-	 */
+   *
+   * @param {*} cpuBrandData
+   * @param {*} event
+   * @returns
+   */
 	static addComputerEntity(cpuBrandData, event) {
 		if (event.target.value === '-') return;
 

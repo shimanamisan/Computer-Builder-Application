@@ -5,8 +5,8 @@ import GpuEntity from '../Entity/GpuEntity';
 
 class GpuSectionConttoller {
 	/**
-	 *
-	 */
+   *
+   */
 	static async gpuBrandElements() {
 		const apiData = await GetApiData.execution('gpu');
 		const element = document.getElementById(GpuViews.gpuBrandId);
@@ -25,8 +25,8 @@ class GpuSectionConttoller {
 	}
 
 	/**
-	 *
-	 */
+   *
+   */
 	static async gpuModelElements(event) {
 		const brandName = event.target.value;
 		const apiData = await GetApiData.execution('gpu');
@@ -48,11 +48,11 @@ class GpuSectionConttoller {
 	}
 
 	/**
-	 *
-	 * @param {*} gpuBrandData
-	 * @param {*} event
-	 * @returns
-	 */
+   *
+   * @param {*} gpuBrandData
+   * @param {*} event
+   * @returns
+   */
 	static addComputerEntity(gpuBrandData, event) {
 		if (event.target.value === '-') return;
 

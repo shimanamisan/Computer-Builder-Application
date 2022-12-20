@@ -1,14 +1,14 @@
 import GetApiData from '../Model/GetApiData';
 import MemoryViews from '../Viwes/MemoryViews';
 import ExtractMemoryModel from '../ValueObject/ExtractMemoryModel';
-import InputChange from './EventController/InputChange';
 import MemoryEntity from '../Entity/MemoryEntity';
 
 class MemorySectionController {
+	static #memoryModelData;
 
 	/**
-   * メモリの枚数の指定が変化したときに実行されるメソッド
-   */
+	 * メモリの枚数の指定が変化したときに実行されるメソッド
+	 */
 	static async addMemoryBrandElements() {
 		const apiData = await GetApiData.execution('ram');
 
@@ -24,45 +24,43 @@ class MemorySectionController {
 	}
 
 	/**
-   *
-   * @returns
-   */
+	 *
+	 * @returns
+	 */
 	static async addMemoryModelElements() {
 		const apiData = await GetApiData.execution('ram');
 		const memoryModel = new ExtractMemoryModel(apiData);
-		const memoryModelData = memoryModel.getModel();
+		MemorySectionController.#memoryModelData = memoryModel.getModel();
 
 		const memoryModelEle = document.getElementById(MemoryViews.memoryModelId);
 		memoryModelEle.innerHTML = `<option selected value="-">-</option>`;
 
-		if (memoryModelEle.length === 0) return;
-
-		for (let i = 0; i < memoryModelData.length; i++) {
-			memoryModelEle.innerHTML += `<option value="${memoryModelData[i].Model}">${memoryModelData[i].Model}</option>`;
+		for (let i = 0; i < MemorySectionController.#memoryModelData.length; i++) {
+			memoryModelEle.innerHTML += `<option value="${MemorySectionController.#memoryModelData[i].Model}">${MemorySectionController.#memoryModelData[i].Model}</option>`;
 		}
-
-		// InputChange.addEvent(memoryModelEle, { handleEvent: MemorySectionController.addComputerEntity });
-
-		memoryModelEle.addEventListener('change', function (event) {
-			MemorySectionController.addComputerEntity(memoryModelData, event);
-		});
 	}
 
-	/**
-   *
-   * @param {*} memoryModelData
-   * @param {*} event
-   * @returns
-   */
-	static addComputerEntity(memoryModelData, event) {
-		if (event.target.value === '-') return;
-		if (memoryModelData.length === 0) return;
+	static addComputerEntity(event) {
+		const memoryBrandValue = document.getElementById(MemoryViews.memoryBrandId).value;
 
-		const selectMemoryModelData = memoryModelData.filter(x => (x.Model === event.target.value ? x : ''));
+		if (memoryBrandValue === '-') {
 
-		console.log(selectMemoryModelData);
+			alert('メモリーのBrandの値に不正な値が選択されています。');
 
-		window.MemoryEntity = new MemoryEntity(selectMemoryModelData, window.MemoryEntity);
+			// Brandの値が不正値だった場合にModelのoptionを初期化
+			const memoryModelEle = document.getElementById(MemoryViews.memoryModelId);
+			memoryModelEle.innerHTML = `<option selected value="-">-</option>`;
+			return;
+		}
+
+		if (event.currentTarget.value === '-') return;
+
+		const selectMemoryModelData = MemorySectionController.#memoryModelData.filter(x => (x.Model === event.currentTarget.value ? x : ''));
+
+		// 異なるPart Numberで複数の同じ名前のモデルが取得される場合があるので、重複した配列の要素を削除
+		const notDuplicateData = Array.from(new Map(selectMemoryModelData.map(x => [x.Brand, x])).values());
+
+		window.MemoryEntity = new MemoryEntity(notDuplicateData, window.MemoryEntity);
 	}
 }
 
