@@ -31,8 +31,10 @@ class ExtractStrageSize {
 		const gbNumLists = [];
 
 		for (let i = 0; i < stringSizeNumLists.length; i++) {
-			if (stringSizeNumLists[i].indexOf('TB') !== -1) tbNumLists.push(parseFloat(stringSizeNumLists[i].replace('TB', '')));
-			if (stringSizeNumLists[i].indexOf('GB') !== -1) gbNumLists.push(parseFloat(stringSizeNumLists[i].replace('GB', '')));
+			if (stringSizeNumLists[i].indexOf('TB') !== -1)
+				tbNumLists.push(parseFloat(stringSizeNumLists[i].replace('TB', '')));
+			if (stringSizeNumLists[i].indexOf('GB') !== -1)
+				gbNumLists.push(parseFloat(stringSizeNumLists[i].replace('GB', '')));
 		}
 
 		tbNumLists.sort((a, b) => b - a);
