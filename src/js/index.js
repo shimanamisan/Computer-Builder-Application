@@ -51,6 +51,7 @@ class App {
 		/* メモリー項目選択時のイベント */
 		InputChange.addEvent(document.getElementById(MemoryViews.memoryQuantityId), MemorySectionController.addMemoryBrandElements);
 		InputChange.addEvent(document.getElementById(MemoryViews.memoryBrandId), MemorySectionController.addMemoryModelElements);
+		InputChange.addEvent(document.getElementById(MemoryViews.memoryModelId), MemorySectionController.addComputerEntity);
 		/***************************/
 
 		InputChange.addEvent(document.getElementById(StorageViews.storageTypeId), StorageSectionController.storageSizeElements);
