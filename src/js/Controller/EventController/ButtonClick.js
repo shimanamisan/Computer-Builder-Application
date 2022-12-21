@@ -8,5 +8,5 @@ class ButtonClick {
     buttonElement.addEventListener('click', func);
   }
 }
-
+ 
 export default ButtonClick;
