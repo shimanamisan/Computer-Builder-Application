@@ -12,39 +12,61 @@ import ButtonClick from './Controller/EventController/ButtonClick';
 import StorageSectionController from './Controller/StorageSectionController';
 import MemorySectionController from './Controller/MemorySectionController';
 import CreateComputerController from './Controller/CreateComputerController';
-import ComputerEntity from './Entity/ComputerEntity';
 import CpuSectionController from './Controller/CpuSectionController';
 import GpuSectionConttoller from './Controller/GpuSectionConttoller';
+import CpuEntity from './Entity/CpuEntity';
+import GpuEntity from './Entity/GpuEntity';
+import MemoryEntity from './Entity/MemoryEntity';
+import StorageEntity from './Entity/StorageEntity';
 
 class App {
-	static async createTopView() {
-		window.ComputerEntity = new ComputerEntity();
-		const container = document.createElement('div');
-		container.classList.add('col-md-8', 'd-flex', 'flex-column', 'm-auto');
-		container.innerHTML += CpuViews.createStringHTML();
-		container.innerHTML += GpuViews.createStringHTML();
-		container.innerHTML += MemoryViews.createStringHTML();
-		container.innerHTML += StorageViews.createStringHTML();
-		container.innerHTML += Button.createStringHTML();
+  static async createTopView() {
+    window.CpuEntity = new CpuEntity();
+    window.GpuEntity = new GpuEntity();
+    window.MemoryEntity = new MemoryEntity();
+    window.StorageEntity = new StorageEntity();
 
-		const target = document.getElementById('target');
-		target.append(container);
+    const container = document.createElement('div');
+    container.classList.add('col-md-8', 'd-flex', 'flex-column', 'm-auto');
+    container.innerHTML += CpuViews.createStringHTML();
+    container.innerHTML += GpuViews.createStringHTML();
+    container.innerHTML += MemoryViews.createStringHTML();
+    container.innerHTML += StorageViews.createStringHTML();
+    container.innerHTML += Button.createStringHTML();
 
-		// cpuのAPIデータを取得して option 要素に追加する
-		await CpuSectionController.cpuBrandElements();
-		// cpuのBrandを切り替えたら同じブランドのgpuを取得する処理を登録する
-		InputChange.addEvent(document.getElementById(CpuViews.cpuBrandId), CpuSectionController.cpuModelElements);
-		// cpuのAPIデータを取得して option 要素に追加する
-		await GpuSectionConttoller.gpuBrandElements();
+    const target = document.getElementById('target');
+    target.append(container);
 
-		await StorageSectionController.strageTypeElement();
+    // cpuのAPIデータを取得して option 要素に追加する
+    await CpuSectionController.cpuBrandElements();
+    // cpuのBrandを切り替えたら同じブランドのgpuを取得する処理を登録する
+    InputChange.addEvent(document.getElementById(CpuViews.cpuBrandId), CpuSectionController.cpuModelElements);
+    // cpuのAPIデータを取得して option 要素に追加する
+    await GpuSectionConttoller.gpuBrandElements();
 
-		InputChange.addEvent(document.getElementById(GpuViews.gpuBrandId), GpuSectionConttoller.gpuModelElements);
-		InputChange.addEvent(document.getElementById(MemoryViews.memoryQuantityId), MemorySectionController.memoryBrandElements);
-		InputChange.addEvent(document.getElementById(StorageViews.storageTypeId), StorageSectionController.strageSizeElements);
+    await StorageSectionController.strageTypeElement();
 
-		ButtonClick.addEvent(document.getElementById(Button.addPcButtonId), CreateComputerController.create);
-	}
+    InputChange.addEvent(document.getElementById(GpuViews.gpuBrandId), GpuSectionConttoller.gpuModelElements);
+
+    /* メモリー項目選択時のイベント */
+    InputChange.addEvent(
+      document.getElementById(MemoryViews.memoryQuantityId),
+      MemorySectionController.addMemoryBrandElements
+    );
+    InputChange.addEvent(
+      document.getElementById(MemoryViews.memoryBrandId),
+      MemorySectionController.addMemoryModelElements
+    );
+    InputChange.addEvent(document.getElementById(MemoryViews.memoryModelId), MemorySectionController.addComputerEntity);
+    /***************************/
+
+    InputChange.addEvent(
+      document.getElementById(StorageViews.storageTypeId),
+      StorageSectionController.storageSizeElements
+    );
+
+    ButtonClick.addEvent(document.getElementById(Button.addPcButtonId), CreateComputerController.create);
+  }
 }
 
 await App.createTopView();

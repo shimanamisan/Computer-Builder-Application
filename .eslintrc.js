@@ -5,7 +5,8 @@ module.exports = {
   env: {
     // ブラウザで動作するJavaScriptなのかNode.jsで動作するJavaScriptなのか指定する
     browser: true, // console.log() などを使用してもエラーとならない
-    es2020: true, // es2020までの構文を利用してもエラーとならない
+    es2021: true, // es2020までの構文を利用してもエラーとならない
+    node: true,
   },
   // 新しい構文でも使用できるようにする
   parser: '@babel/eslint-parser',
@@ -16,11 +17,10 @@ module.exports = {
   rules: {
     'no-console': 'off',
     'prefer-const': 'error', // 更新をしない変数にconst以外が指定されていたらエラーが発生するルール
-    'no-import-assign': 'off', // import 文で作成した変数への代入のチェックを無効化
-    indent: ['error', 'tab', { SwitchCase: 1 }],
+    indent: ['error', 2],
     semi: ['error', 'always'],
   },
   parserOptions: {
-    sourceType: 'module', // import, export などのesmodulesの構文を利用してもエラーとならない
+    // sourceType: 'module', // import, export などのesmodulesの構文を利用してもエラーとならない
   },
 };
