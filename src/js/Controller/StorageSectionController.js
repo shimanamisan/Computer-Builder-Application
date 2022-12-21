@@ -30,7 +30,10 @@ class StorageSectionController {
 			storageTypeEle.innerHTML += `<option value="${storageTypeLists[i]}">${storageTypeLists[i]}</option>`;
 		}
 
-		InputChange.addEvent(document.getElementById(StorageViews.storageTypeId), StorageSectionController.storageSizeElements);
+		InputChange.addEvent(
+			document.getElementById(StorageViews.storageTypeId),
+			StorageSectionController.storageSizeElements
+		);
 	}
 
 	/**

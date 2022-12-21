@@ -10,6 +10,10 @@ class CpuEntity {
 			this.#cpu = apiData;
 		}
 	}
+
+	getCpu() {
+		return this.#cpu;
+	}
 }
 
 export default CpuEntity;

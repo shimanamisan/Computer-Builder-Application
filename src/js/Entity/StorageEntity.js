@@ -10,6 +10,10 @@ class StorageEntity {
 			this.#storage = apiData;
 		}
 	}
+
+	getStorage() {
+		return this.#storage;
+	}
 }
 
 export default StorageEntity;

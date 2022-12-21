@@ -10,6 +10,10 @@ class GpuEntity {
 			this.#gpu = apiData;
 		}
 	}
+
+	getGpu() {
+		return this.#gpu;
+	}
 }
 
 export default GpuEntity;

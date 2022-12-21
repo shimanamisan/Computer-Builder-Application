@@ -2,6 +2,9 @@ import CpuViews from '../Viwes/CpuViews';
 import GpuViews from '../Viwes/GpuViews';
 import MemoryViews from '../Viwes/MemoryViews';
 import StorageViews from '../Viwes/StorageViews';
+import BuildComputerViews from '../Viwes/BuildComputerViews';
+import ExtractGameBenchMarkScore from '../ValueObject/ExtractGameBenchMarkScore';
+import ExtractWorkBenchMarkScore from '../ValueObject/ExtractWorkBenchMarkScore';
 
 class CreateComputerController {
 	static async create() {
@@ -35,12 +38,27 @@ class CreateComputerController {
 			return;
 		}
 
-		console.log(window.CpuEntity);
-		console.log(window.GpuEntity);
-		console.log(window.MemoryEntity);
-		console.log(window.StorageEntity);
+		const calcuGameScore = new ExtractGameBenchMarkScore(
+			window.CpuEntity.getCpu(),
+			window.GpuEntity.getGpu(),
+			window.MemoryEntity.getMemory(),
+			window.StorageEntity.getStorage()
+		);
 
-		return;
+		const calcuWrokScore = new ExtractWorkBenchMarkScore(
+			window.CpuEntity.getCpu(),
+			window.GpuEntity.getGpu(),
+			window.MemoryEntity.getMemory(),
+			window.StorageEntity.getStorage()
+		);
+
+		const target = document.getElementById('target');
+		const container = document.createElement('div');
+		container.innerHTML += BuildComputerViews.createStringHTML(
+			calcuGameScore,
+			calcuWrokScore
+		);
+		target.append(container);
 	}
 
 	static isFormEmpty(value) {

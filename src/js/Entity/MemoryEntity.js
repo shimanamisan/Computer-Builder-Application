@@ -10,6 +10,10 @@ class MemoryEntity {
 			this.#memory = apiData;
 		}
 	}
+
+	getMemory() {
+		return this.#memory;
+	}
 }
 
 export default MemoryEntity;

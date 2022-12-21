@@ -49,12 +49,21 @@ class App {
 		InputChange.addEvent(document.getElementById(GpuViews.gpuBrandId), GpuSectionConttoller.gpuModelElements);
 
 		/* メモリー項目選択時のイベント */
-		InputChange.addEvent(document.getElementById(MemoryViews.memoryQuantityId), MemorySectionController.addMemoryBrandElements);
-		InputChange.addEvent(document.getElementById(MemoryViews.memoryBrandId), MemorySectionController.addMemoryModelElements);
+		InputChange.addEvent(
+			document.getElementById(MemoryViews.memoryQuantityId),
+			MemorySectionController.addMemoryBrandElements
+		);
+		InputChange.addEvent(
+			document.getElementById(MemoryViews.memoryBrandId),
+			MemorySectionController.addMemoryModelElements
+		);
 		InputChange.addEvent(document.getElementById(MemoryViews.memoryModelId), MemorySectionController.addComputerEntity);
 		/***************************/
 
-		InputChange.addEvent(document.getElementById(StorageViews.storageTypeId), StorageSectionController.storageSizeElements);
+		InputChange.addEvent(
+			document.getElementById(StorageViews.storageTypeId),
+			StorageSectionController.storageSizeElements
+		);
 
 		ButtonClick.addEvent(document.getElementById(Button.addPcButtonId), CreateComputerController.create);
 	}
