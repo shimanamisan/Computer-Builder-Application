@@ -1,19 +1,19 @@
 class MemoryEntity {
-	#memory;
+  #memory;
 
-	constructor(apiData, memoryEntity) {
-		if (apiData instanceof Array) {
-			if (apiData.length === 0) throw 'An invalid argument was assigned.';
-		}
+  constructor(apiData, memoryEntity) {
+    if (apiData instanceof Array) {
+      if (apiData.length === 0) throw 'An invalid argument was assigned.';
+    }
 
-		if (memoryEntity !== null && memoryEntity instanceof MemoryEntity) {
-			this.#memory = apiData;
-		}
-	}
+    if (memoryEntity !== null && memoryEntity instanceof MemoryEntity) {
+      this.#memory = apiData;
+    }
+  }
 
-	getMemory() {
-		return this.#memory;
-	}
+  getMemory() {
+    return this.#memory;
+  }
 }
 
 export default MemoryEntity;

@@ -7,121 +7,121 @@ import ExtractStrageModel from '../ValueObject/ExtractStrageModel';
 import StorageEntity from '../Entity/StorageEntity';
 
 class StorageSectionController {
-	/**
+  /**
    *
    */
-	static async strageTypeElement() {
-		const hddType = await GetApiData.execution('hdd');
-		const ssdType = await GetApiData.execution('ssd');
-		const mergeArry = hddType.concat(ssdType);
-		const hashMap = {};
+  static async strageTypeElement() {
+    const hddType = await GetApiData.execution('hdd');
+    const ssdType = await GetApiData.execution('ssd');
+    const mergeArry = hddType.concat(ssdType);
+    const hashMap = {};
 
-		for (let i = 0; i < mergeArry.length; i++) {
-			if (hashMap[mergeArry[i].Type] === undefined) hashMap[mergeArry[i].Type] = mergeArry[i].Type;
-			if (hashMap[mergeArry[i].Type] === undefined) hashMap[mergeArry[i].Type] = mergeArry[i].Type;
-		}
+    for (let i = 0; i < mergeArry.length; i++) {
+      if (hashMap[mergeArry[i].Type] === undefined) hashMap[mergeArry[i].Type] = mergeArry[i].Type;
+      if (hashMap[mergeArry[i].Type] === undefined) hashMap[mergeArry[i].Type] = mergeArry[i].Type;
+    }
 
-		const storageTypeLists = Object.keys(hashMap);
+    const storageTypeLists = Object.keys(hashMap);
 
-		const storageTypeEle = document.getElementById(StorageViews.storageTypeId);
+    const storageTypeEle = document.getElementById(StorageViews.storageTypeId);
 
-		storageTypeEle.innerHTML = `<option selected value="-">-</option>`;
-		for (let i = 0; i < storageTypeLists.length; i++) {
-			storageTypeEle.innerHTML += `<option value="${storageTypeLists[i]}">${storageTypeLists[i]}</option>`;
-		}
+    storageTypeEle.innerHTML = `<option selected value="-">-</option>`;
+    for (let i = 0; i < storageTypeLists.length; i++) {
+      storageTypeEle.innerHTML += `<option value="${storageTypeLists[i]}">${storageTypeLists[i]}</option>`;
+    }
 
-		InputChange.addEvent(
-			document.getElementById(StorageViews.storageTypeId),
-			StorageSectionController.storageSizeElements
-		);
-	}
+    InputChange.addEvent(
+      document.getElementById(StorageViews.storageTypeId),
+      StorageSectionController.storageSizeElements
+    );
+  }
 
-	/**
+  /**
    *
    * @returns
    */
-	static async storageSizeElements() {
-		const storageSizeEle = document.getElementById(StorageViews.storageSizeId);
-		const storageType = document.getElementById(StorageViews.storageTypeId).value.toLowerCase();
+  static async storageSizeElements() {
+    const storageSizeEle = document.getElementById(StorageViews.storageSizeId);
+    const storageType = document.getElementById(StorageViews.storageTypeId).value.toLowerCase();
 
-		if (storageType === '-') {
-			storageSizeEle.innerHTML = `<option selected value="-">-</option>`;
-			return;
-		}
+    if (storageType === '-') {
+      storageSizeEle.innerHTML = `<option selected value="-">-</option>`;
+      return;
+    }
 
-		const apiData = await GetApiData.execution(storageType);
+    const apiData = await GetApiData.execution(storageType);
 
-		// ストレージのサイズの文字列を切り出した配列を格納したValueObject（ソート済み）
-		const strageSizeValueObject = new ExtractStrageSize(apiData);
-		const strageSizeLists = strageSizeValueObject.getStrageSize();
+    // ストレージのサイズの文字列を切り出した配列を格納したValueObject（ソート済み）
+    const strageSizeValueObject = new ExtractStrageSize(apiData);
+    const strageSizeLists = strageSizeValueObject.getStrageSize();
 
-		storageSizeEle.innerHTML = `<option selected value="-">-</option>`;
-		for (let i = 0; i < strageSizeLists.length; i++) {
-			storageSizeEle.innerHTML += `<option value="${strageSizeLists[i]}">${strageSizeLists[i]}</option>`;
-		}
+    storageSizeEle.innerHTML = `<option selected value="-">-</option>`;
+    for (let i = 0; i < strageSizeLists.length; i++) {
+      storageSizeEle.innerHTML += `<option value="${strageSizeLists[i]}">${strageSizeLists[i]}</option>`;
+    }
 
-		InputChange.addEvent(storageSizeEle, StorageSectionController.addStorageBrandElement);
-	}
+    InputChange.addEvent(storageSizeEle, StorageSectionController.addStorageBrandElement);
+  }
 
-	/**
+  /**
    * ストレージのサイズが選択されたらBrand要素を追加する
    * @returns
    */
-	static async addStorageBrandElement() {
-		const storageType = document.getElementById(StorageViews.storageTypeId).value.toLowerCase();
-		const stoageSize = document.getElementById(StorageViews.storageSizeId).value;
-		const storageBrandEle = document.getElementById(StorageViews.storageBrandId);
+  static async addStorageBrandElement() {
+    const storageType = document.getElementById(StorageViews.storageTypeId).value.toLowerCase();
+    const stoageSize = document.getElementById(StorageViews.storageSizeId).value;
+    const storageBrandEle = document.getElementById(StorageViews.storageBrandId);
 
-		const apiData = await GetApiData.execution(storageType);
+    const apiData = await GetApiData.execution(storageType);
 
-		const brandValueObject = new ExtractBrandFromSize(stoageSize, apiData);
-		const storageBrandLists = brandValueObject.getBrands();
+    const brandValueObject = new ExtractBrandFromSize(stoageSize, apiData);
+    const storageBrandLists = brandValueObject.getBrands();
 
-		storageBrandEle.innerHTML = `<option selected value="-">-</option>`;
-		for (let i = 0; i < storageBrandLists.length; i++) {
-			storageBrandEle.innerHTML += `<option value="${storageBrandLists[i]}">${storageBrandLists[i]}</option>`;
-		}
+    storageBrandEle.innerHTML = `<option selected value="-">-</option>`;
+    for (let i = 0; i < storageBrandLists.length; i++) {
+      storageBrandEle.innerHTML += `<option value="${storageBrandLists[i]}">${storageBrandLists[i]}</option>`;
+    }
 
-		InputChange.addEvent(storageBrandEle, StorageSectionController.addStargeModelElement);
-	}
+    InputChange.addEvent(storageBrandEle, StorageSectionController.addStargeModelElement);
+  }
 
-	/**
+  /**
    *
    */
-	static async addStargeModelElement() {
-		const storageType = document.getElementById(StorageViews.storageTypeId).value.toLowerCase();
-		const storageSize = document.getElementById(StorageViews.storageSizeId).value;
-		const storageBrand = document.getElementById(StorageViews.storageBrandId).value;
-		const storageModelEle = document.getElementById(StorageViews.storageModelId);
+  static async addStargeModelElement() {
+    const storageType = document.getElementById(StorageViews.storageTypeId).value.toLowerCase();
+    const storageSize = document.getElementById(StorageViews.storageSizeId).value;
+    const storageBrand = document.getElementById(StorageViews.storageBrandId).value;
+    const storageModelEle = document.getElementById(StorageViews.storageModelId);
 
-		const apiData = await GetApiData.execution(storageType);
-		const storageModelValueObject = new ExtractStrageModel(storageSize, storageBrand, apiData);
+    const apiData = await GetApiData.execution(storageType);
+    const storageModelValueObject = new ExtractStrageModel(storageSize, storageBrand, apiData);
 
-		const strageModels = storageModelValueObject.getModel();
+    const strageModels = storageModelValueObject.getModel();
 
-		storageModelEle.innerHTML = `<option selected value="-">-</option>`;
-		for (let i = 0; i < strageModels.length; i++) {
-			storageModelEle.innerHTML += `<option value="${strageModels[i].Model}">${strageModels[i].Model}</option>`;
-		}
+    storageModelEle.innerHTML = `<option selected value="-">-</option>`;
+    for (let i = 0; i < strageModels.length; i++) {
+      storageModelEle.innerHTML += `<option value="${strageModels[i].Model}">${strageModels[i].Model}</option>`;
+    }
 
-		InputChange.addEvent(storageModelEle, function (event) {
-			StorageSectionController.addComputerEntity(strageModels, event);
-		});
-	}
+    InputChange.addEvent(storageModelEle, function (event) {
+      StorageSectionController.addComputerEntity(strageModels, event);
+    });
+  }
 
-	/**
+  /**
    *
    * @param {*} storageModelData
    * @param {*} event
    * @returns
    */
-	static addComputerEntity(storageModelData, event) {
-		if (event.target.value === '-') return;
+  static addComputerEntity(storageModelData, event) {
+    if (event.target.value === '-') return;
 
-		const selectStorageModelData = storageModelData.filter(x => (x.Model === event.target.value ? x : ''));
+    const selectStorageModelData = storageModelData.filter(x => (x.Model === event.target.value ? x : ''));
 
-		window.StorageEntity = new StorageEntity(selectStorageModelData, window.StorageEntity);
-	}
+    window.StorageEntity = new StorageEntity(selectStorageModelData, window.StorageEntity);
+  }
 }
 
 export default StorageSectionController;

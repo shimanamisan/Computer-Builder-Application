@@ -1,23 +1,22 @@
 class BuildComputerViews {
-	static cpuBrandId = 'cpuBrand';
-	static cpuModelId = 'cpuModel';
-	static gpuBrandId = 'gpuBrand';
-	static gpuModelId = 'gpuModel';
-	static memoryBrandId = 'memoryBrand';
-	static memoryModelId = 'memoryModel';
-	static storageTypeId = 'storageType';
-	static storageSizeId = 'storageSize';
-	static storageBrandId = 'storageBrand';
-	static storageModelId = 'storageModel';
-	/**
+  static cpuBrandId = 'cpuBrand';
+  static cpuModelId = 'cpuModel';
+  static gpuBrandId = 'gpuBrand';
+  static gpuModelId = 'gpuModel';
+  static memoryBrandId = 'memoryBrand';
+  static memoryModelId = 'memoryModel';
+  static storageTypeId = 'storageType';
+  static storageSizeId = 'storageSize';
+  static storageBrandId = 'storageBrand';
+  static storageModelId = 'storageModel';
+  /**
    * HTML要素の雛形を返す
    * @returns {string} - HTML要素を返す
    */
-	static createStringHTML(calcuGameScore, calcuWrokScore) {
+  static createStringHTML(calcuGameScore, calcuWrokScore) {
+    console.log(calcuGameScore, calcuWrokScore);
 
-		console.log(calcuGameScore, calcuWrokScore);
-
-		return `
+    return `
       <div id="build-computer-area">
         <div class="container mt-4 p-3 p-builder__container">
           <h1 class="text-center">Your PC1</h1>
@@ -50,7 +49,7 @@ class BuildComputerViews {
         </div>
       </div>
     `;
-	}
+  }
 }
 
 export default BuildComputerViews;

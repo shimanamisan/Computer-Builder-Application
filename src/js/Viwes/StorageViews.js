@@ -1,15 +1,15 @@
 class StorageViews {
-	static storageTypeId = 'storageType';
-	static storageSizeId = 'storageSize';
-	static storageBrandId = 'storageBrand';
-	static storageModelId = 'storageModel';
+  static storageTypeId = 'storageType';
+  static storageSizeId = 'storageSize';
+  static storageBrandId = 'storageBrand';
+  static storageModelId = 'storageModel';
 
-	/**
+  /**
    * HTML要素の雛形を返す
    * @returns {string} - HTML要素を返す
    */
-	static createStringHTML() {
-		return `
+  static createStringHTML() {
+    return `
       <div class="d-md-flex d-flex flex-column">
         <div class="m-2 pt-3">
           <h4>step4: Select Your Storage <i class="fa-solid fa-hard-drive"></i></h4>
@@ -35,7 +35,7 @@ class StorageViews {
         </div>
       </div>
     `;
-	}
+  }
 }
 
 export default StorageViews;

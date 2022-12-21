@@ -1,15 +1,15 @@
 class MemoryViews {
-	// このViewクラスで使用しているID要素名
-	static memoryQuantityId = 'memoryQuantity';
-	static memoryBrandId = 'memoryBrand';
-	static memoryModelId = 'memoryModel';
+  // このViewクラスで使用しているID要素名
+  static memoryQuantityId = 'memoryQuantity';
+  static memoryBrandId = 'memoryBrand';
+  static memoryModelId = 'memoryModel';
 
-	/**
+  /**
    * HTML要素の雛形を返す
    * @returns {string} - HTML要素を返す
    */
-	static createStringHTML() {
-		return `
+  static createStringHTML() {
+    return `
     <div class="m-2 pt-3">
     <h4>step3: Select Your Memory Card <i class="fa-solid fa-memory"></i></h4>
     </div>
@@ -35,7 +35,7 @@ class MemoryViews {
       </select>
     </div>
     `;
-	}
+  }
 }
 
 export default MemoryViews;
