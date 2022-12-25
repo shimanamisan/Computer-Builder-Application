@@ -2,11 +2,15 @@ import '@fortawesome/fontawesome-free/js/fontawesome';
 import '@fortawesome/fontawesome-free/js/solid';
 import '@fortawesome/fontawesome-free/js/regular';
 import '@scss/style';
+// import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 import CpuViews from './Viwes/CpuViews';
 import GpuViews from './Viwes/GpuViews';
 import MemoryViews from './Viwes/MemoryViews';
 import StorageViews from './Viwes/StorageViews';
-import Button from './Viwes/Button';
+import ButtonViews from './Viwes/ButtonViews';
 import InputChange from './Controller/EventController/InputChange';
 import ButtonClick from './Controller/EventController/ButtonClick';
 import StorageSectionController from './Controller/StorageSectionController';
@@ -32,7 +36,7 @@ class App {
     container.innerHTML += GpuViews.createStringHTML();
     container.innerHTML += MemoryViews.createStringHTML();
     container.innerHTML += StorageViews.createStringHTML();
-    container.innerHTML += Button.createStringHTML();
+    container.innerHTML += ButtonViews.createStringHTML();
 
     const target = document.getElementById('target');
     target.append(container);
@@ -65,7 +69,7 @@ class App {
       StorageSectionController.storageSizeElements
     );
 
-    ButtonClick.addEvent(document.getElementById(Button.addPcButtonId), CreateComputerController.create);
+    ButtonClick.addEvent(document.getElementById(ButtonViews.addPcButtonId), CreateComputerController.createHtml);
   }
 }
 

@@ -40,10 +40,10 @@ module.exports = {
         // ローダーに対する設定は babel.config.js というファイルに切り出して設定する
       },
       // ***********************
-      // * scssに関する設定
+      // * css, scssに関する設定
       // ***********************
       {
-        test: /\.scss$/,
+        test: /\.(sa|sc|c)ss$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader'],
       },
       // ***********************

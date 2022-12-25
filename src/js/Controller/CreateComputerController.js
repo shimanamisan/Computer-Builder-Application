@@ -1,3 +1,4 @@
+import Swiper, { Navigation, Pagination, Scrollbar } from 'swiper';
 import CpuViews from '../Viwes/CpuViews';
 import GpuViews from '../Viwes/GpuViews';
 import MemoryViews from '../Viwes/MemoryViews';
@@ -7,7 +8,69 @@ import ExtractGameBenchMarkScore from '../ValueObject/ExtractGameBenchMarkScore'
 import ExtractWorkBenchMarkScore from '../ValueObject/ExtractWorkBenchMarkScore';
 
 class CreateComputerController {
-  static async create() {
+  /**
+   *
+   * @returns
+   */
+  static async createHtml() {
+    const isValid = CreateComputerController.formValidation();
+
+    if (isValid) return;
+
+    const calcuGameScore = new ExtractGameBenchMarkScore(
+      window.CpuEntity.getCpu(),
+      window.GpuEntity.getGpu(),
+      window.MemoryEntity.getMemory(),
+      window.StorageEntity.getStorage()
+    );
+
+    const calcuWrokScore = new ExtractWorkBenchMarkScore(
+      window.CpuEntity.getCpu(),
+      window.GpuEntity.getGpu(),
+      window.MemoryEntity.getMemory(),
+      window.StorageEntity.getStorage()
+    );
+
+    const target = document.getElementById('target');
+
+    if (document.getElementById('buildComputerArea') === null) {
+      const container = document.createElement('div');
+      container.setAttribute('id', 'buildComputerArea');
+      container.classList.add('mt-5');
+      target.append(container);
+    }
+
+    const buildComputerArea = document.getElementById('buildComputerArea');
+    buildComputerArea.innerHTML = ``;
+
+    const sliderContainerHtml = BuildComputerViews.createSliderContainerHtml();
+    buildComputerArea.innerHTML += sliderContainerHtml;
+
+    BuildComputerViews.createStringInnerHTML(calcuGameScore, calcuWrokScore);
+
+    // 指定した範囲で eslintのルールを無効化する
+    /* eslint-disable */
+    var swiper = new Swiper('.mySwiper', {
+      // Install modules
+      modules: [Navigation, Pagination, Scrollbar],
+      spaceBetween: 30,
+      centeredSlides: true,
+      pagination: {
+        el: '.swiper-pagination',
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+    /* eslint-enable */
+  }
+
+  /**
+   *
+   * @returns
+   */
+  static formValidation() {
     const cpuBrand = document.getElementById(CpuViews.cpuBrandId).value;
     const cpuModel = document.getElementById(CpuViews.cpuModelId).value;
     const gpuBrand = document.getElementById(GpuViews.gpuBrandId).value;
@@ -35,29 +98,17 @@ class CreateComputerController {
       !CreateComputerController.isFormEmpty(strageModel)
     ) {
       alert('全ての項目を入力して下さい。');
-      return;
+      return true;
+    } else {
+      return false;
     }
-
-    const calcuGameScore = new ExtractGameBenchMarkScore(
-      window.CpuEntity.getCpu(),
-      window.GpuEntity.getGpu(),
-      window.MemoryEntity.getMemory(),
-      window.StorageEntity.getStorage()
-    );
-
-    const calcuWrokScore = new ExtractWorkBenchMarkScore(
-      window.CpuEntity.getCpu(),
-      window.GpuEntity.getGpu(),
-      window.MemoryEntity.getMemory(),
-      window.StorageEntity.getStorage()
-    );
-
-    const target = document.getElementById('target');
-    const container = document.createElement('div');
-    container.innerHTML += BuildComputerViews.createStringHTML(calcuGameScore, calcuWrokScore);
-    target.append(container);
   }
 
+  /**
+   *
+   * @param {*} value
+   * @returns
+   */
   static isFormEmpty(value) {
     if (value === '-' || value === '' || value === undefined) return false;
 
