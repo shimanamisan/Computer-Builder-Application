@@ -1,6 +1,11 @@
 class MemoryEntity {
   #memory;
 
+  /**
+   *
+   * @param {*} apiData
+   * @param {*} memoryEntity
+   */
   constructor(apiData, memoryEntity) {
     if (apiData instanceof Array) {
       if (apiData.length === 0) throw 'An invalid argument was assigned.';
@@ -11,6 +16,10 @@ class MemoryEntity {
     }
   }
 
+  /**
+   *
+   * @returns
+   */
   getMemory() {
     return this.#memory;
   }

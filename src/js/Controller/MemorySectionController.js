@@ -42,6 +42,11 @@ class MemorySectionController {
     }
   }
 
+  /**
+   *
+   * @param {*} event
+   * @returns
+   */
   static addComputerEntity(event) {
     const memoryBrandValue = document.getElementById(MemoryViews.memoryBrandId).value;
 

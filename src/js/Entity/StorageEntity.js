@@ -1,6 +1,11 @@
 class StorageEntity {
   #storage;
 
+  /**
+   *
+   * @param {*} apiData
+   * @param {*} storageEntity
+   */
   constructor(apiData, storageEntity) {
     if (apiData instanceof Array) {
       if (apiData.length === 0) throw 'An invalid argument was assigned.';
@@ -11,6 +16,10 @@ class StorageEntity {
     }
   }
 
+  /**
+   *
+   * @returns
+   */
   getStorage() {
     return this.#storage;
   }
