@@ -1,10 +1,29 @@
 @import '~bootstrap/scss/bootstrap';
 
+.swiper {
+  background-color: #dbdbff;
+  width: 100%;
+  @media (min-width: 768px) {
+    width: 75%;
+  }
+}
+
 .p-builder {
   &__container {
     background-color: #dbdbff;
+    position: relative;
   }
 }
+
+.p-arrow {
+  &-hide{
+    display: none;
+    @media (min-width: 768px) {
+      display: flex;
+    }
+  }
+}
+
 .btn-container {
   width: 25%;
   &--full {
