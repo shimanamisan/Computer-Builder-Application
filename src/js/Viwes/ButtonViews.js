@@ -1,5 +1,6 @@
-class Button {
+class ButtonViews {
   static addPcButtonId = 'add-pc-button';
+
   /**
    * HTML要素の雛形を返す
    * @returns {string} - HTML要素を返す
@@ -13,4 +14,4 @@ class Button {
   }
 }
 
-export default Button;
+export default ButtonViews;

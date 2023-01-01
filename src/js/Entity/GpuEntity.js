@@ -1,6 +1,11 @@
 class GpuEntity {
   #gpu;
 
+  /**
+   *
+   * @param {*} apiData
+   * @param {*} gpuEntity
+   */
   constructor(apiData, gpuEntity) {
     if (apiData instanceof Array) {
       if (apiData.length === 0) throw 'An invalid argument was assigned.';
@@ -11,6 +16,10 @@ class GpuEntity {
     }
   }
 
+  /**
+   *
+   * @returns
+   */
   getGpu() {
     return this.#gpu;
   }

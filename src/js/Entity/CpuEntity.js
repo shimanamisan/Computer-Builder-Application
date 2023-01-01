@@ -1,6 +1,11 @@
 class CpuEntity {
   #cpu;
 
+  /**
+   *
+   * @param {*} apiData
+   * @param {*} cpuEntity
+   */
   constructor(apiData, cpuEntity) {
     if (apiData instanceof Array) {
       if (apiData.length === 0) throw 'An invalid argument was assigned.';
@@ -11,6 +16,10 @@ class CpuEntity {
     }
   }
 
+  /**
+   *
+   * @returns
+   */
   getCpu() {
     return this.#cpu;
   }
