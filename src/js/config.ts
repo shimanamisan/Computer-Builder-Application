@@ -1,4 +1,4 @@
-const config = {
+const config: { api: string } = {
   api: 'https://api.recursionist.io/builder/computers',
 };
 

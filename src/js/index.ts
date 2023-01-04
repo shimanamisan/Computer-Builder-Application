@@ -25,12 +25,12 @@ import StorageEntity from './Entity/StorageEntity';
 
 class App {
   static async createTopView() {
-    window.CpuEntity = new CpuEntity();
-    window.GpuEntity = new GpuEntity();
-    window.MemoryEntity = new MemoryEntity();
-    window.StorageEntity = new StorageEntity();
+    // window.CpuEntity = new CpuEntity();
+    // window.GpuEntity = new GpuEntity();
+    // window.MemoryEntity = new MemoryEntity();
+    // window.StorageEntity = new StorageEntity();
 
-    const container = document.createElement('div');
+    const container: HTMLElement = document.createElement('div');
     container.classList.add('col-md-8', 'd-flex', 'flex-column', 'm-auto');
     container.innerHTML += CpuViews.createStringHTML();
     container.innerHTML += GpuViews.createStringHTML();
@@ -38,7 +38,7 @@ class App {
     container.innerHTML += StorageViews.createStringHTML();
     container.innerHTML += ButtonViews.createStringHTML();
 
-    const target = document.getElementById('target');
+    const target: any | null = document.getElementById('target');
     target.append(container);
 
     // cpuのAPIデータを取得して option 要素に追加する
