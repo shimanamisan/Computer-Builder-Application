@@ -21,24 +21,35 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WriteFilePlugin = require('write-file-webpack-plugin');
 
 module.exports = {
-  entry: './src/js/index.js',
+  entry: './src/js/index.ts',
   output: {
     path: dist,
-    filename: './js/[name]/bundle.mim.js',
+    filename: './js/bundle.[contenthash].mim.js',
   },
   module: {
     rules: [
       // *********************************
-      // * JSファイルに対する設定（主にBabel）
+      // * TSファイルに対する設定
       // *********************************
       {
-        // ローダーの処理対象を指定
-        test: /\.js$/,
+        // 拡張子 .ts の場合
+        test: /\.ts$/,
         // ローダーの処理対象から除外するディレクトリを指定
         exclude: /node_modules/,
-        loader: 'babel-loader',
-        // ローダーに対する設定は babel.config.js というファイルに切り出して設定する
+        // TypeScript をコンパイルする
+        use: 'ts-loader',
       },
+      // *********************************
+      // * JSファイルに対する設定（主にBabel）
+      // *********************************
+      // {
+      //   // ローダーの処理対象を指定
+      //   test: /\.js$/,
+      //   // ローダーの処理対象から除外するディレクトリを指定
+      //   exclude: /node_modules/,
+      //   loader: 'babel-loader',
+      //   // ローダーに対する設定は babel.config.js というファイルに切り出して設定する
+      // },
       // ***********************
       // * css, scssに関する設定
       // ***********************
@@ -67,14 +78,11 @@ module.exports = {
   // 各種プラグインを読み込む
   plugins: [
     // 指定した出力ディレクトリ内のファイルをクリーンアップ（削除）する
-    new CleanWebpackPlugin({
-      // 特定のファイルが削除されないようにする
-      // cleanOnceBeforeBuildPatterns: ['**/*', '!**.json'],
-    }),
+    new CleanWebpackPlugin(),
     // jsファイルとcssファイルを分割するためのプラグイン
     new MiniCssExtractPlugin({
       // outputオプションのfilenameと同じ動作をする
-      filename: `./css/style.min.css`,
+      filename: `./css/style.[contenthash].min.css`,
     }),
     // HTMLのテンプレートファイルからバンドルされたモジュールを読み込んだHTMLファイルを出力する
     new HtmlWebpackPlugin({
@@ -102,6 +110,6 @@ module.exports = {
       '@scss': `${src}/scss`,
     },
     // importするときのファイル名から拡張子部分を省略できるようになる
-    extensions: ['*', '.js', '.scss', '.json', '.jpg'],
+    extensions: ['*', '.js', '.ts'],
   },
 };
