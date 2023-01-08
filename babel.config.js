@@ -6,7 +6,7 @@ module.exports = {
       {
         useBuiltIns: 'usage', // 必要なポリフィルのみを取り込む設定
         corejs: 3, // corejsのバージョンを指定
-        debug: true // 取り込まれたポリフィルを確認する。不要であれば削除する
+        // debug: true // 取り込まれたポリフィルを確認する。不要であれば削除する
       },
     ],
     '@babel/preset-typescript'
