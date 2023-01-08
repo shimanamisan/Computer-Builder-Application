@@ -1,12 +1,13 @@
 class GpuViews {
-  static gpuBrandId = 'gpuBrand';
-  static gpuModelId = 'gpuModel';
+  // このViewクラスで使用しているID要素名
+  static gpuBrandId: string = 'gpuBrand';
+  static gpuModelId: string = 'gpuModel';
 
   /**
    * HTML要素の雛形を返す
-   * @returns {string} - HTML要素を返す
+   * @returns HTMLの文字列を返す
    */
-  static createStringHTML() {
+  static createStringHTML(): string {
     return `
     <div class="m-2 pt-3">
     <h4>step2: Select Your GPU <i class="fa-solid fa-microchip"></i></h4>
