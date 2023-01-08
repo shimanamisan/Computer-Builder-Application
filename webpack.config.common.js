@@ -33,6 +33,9 @@ module.exports = {
         test: /\.ts$/,
         // TypeScript をコンパイルする
         use: 'ts-loader',
+        exclude: /node_modules/,
+        // BabelでTypeScriptをES5にトランスパイする
+        use: ["babel-loader"],
       },
       // ***********************
       // * css, scssに関する設定

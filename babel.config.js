@@ -9,5 +9,6 @@ module.exports = {
         // debug: true // 取り込まれたポリフィルを確認する。不要であれば削除する
       },
     ],
+    '@babel/preset-typescript'
   ],
 };
