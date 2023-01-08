@@ -1,5 +1,5 @@
 class ExtractStrageSize {
-  #values;
+  private values: string[];
 
   // 考え方
   // 1. 特定の文字列が含まれているか検索する. 戻り値は配列
@@ -10,18 +10,22 @@ class ExtractStrageSize {
   // 6. 取り出した数字を数値に変換する. ここで小数点の値もあるので変換のフォーマットには注意する
   // 7. 変換した値を TB, GB の値で各種ソートして文字列を連結させる
   // 8. 最終的に2つの配列を結合させて要素に追加する
-  constructor(values) {
-    if (values.length === 0) {
-      throw 'An invalid argument was assigned.';
-    }
 
-    const hashMap = {};
+  /**
+   * コンストラクタ
+   * @param values api から取得したデータ
+   */
+  constructor(values: apiData[]) {
+    if (values.length === 0) throw 'An invalid argument was assigned.';
+
+    const hashMap: { [key: string]: string } = {};
 
     for (let i = 0; i < values.length; i++) {
-      const currentData = values[i].Model.split(' ').filter(str => str.includes('GB') || str.includes('TB'));
+      const currentData: string[] = values[i].Model.split(' ').filter(str => str.includes('GB') || str.includes('TB'));
+      const storageSize: string = currentData[0];
 
       if (currentData.length !== 0) {
-        if (hashMap[currentData] === undefined) hashMap[currentData] = currentData;
+        if (hashMap[storageSize] === undefined) hashMap[storageSize] = storageSize;
       }
     }
 
@@ -43,11 +47,14 @@ class ExtractStrageSize {
     const addUnitStrTB = tbNumLists.map(x => x.toString() + 'TB');
     const addUnitStrGB = tbNumLists.map(x => x.toString() + 'GB');
 
-    this.#values = addUnitStrTB.concat(addUnitStrGB);
+    this.values = addUnitStrTB.concat(addUnitStrGB);
   }
 
-  getStrageSize() {
-    return this.#values;
+  /**
+   * ゲッター
+   */
+  getStrageSize(): string[] {
+    return this.values;
   }
 }
 

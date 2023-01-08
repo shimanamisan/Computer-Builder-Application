@@ -1,25 +1,32 @@
-import MemoryViews from '../Viwes/MemoryViews';
+import MemoryViews from '../Views/MemoryViews';
 
 class ExtractMemoryModel {
-  #value;
+  private value: apiData[];
 
-  constructor(values) {
-    if (values.length === 0) {
-      throw 'An invalid argument was assigned.';
-    }
+  /**
+   * コンストラクター
+   * @param values api から取得したデータ
+   */
+  constructor(values: apiData[]) {
+    if (values.length === 0) throw 'An invalid argument was assigned.';
 
-    const memoryNum = document.getElementById(MemoryViews.memoryQuantityId).value;
-    const memoryBrand = document.getElementById(MemoryViews.memoryBrandId).value;
+    const memoryNumEle = document.getElementById(MemoryViews.memoryQuantityId)! as HTMLSelectElement;
+    const memoryBrandEle = document.getElementById(MemoryViews.memoryBrandId)! as HTMLSelectElement;
 
-    const filterBrand = values.filter(x => (x.Brand === memoryBrand ? x : ''));
+    // select要素で選択したBrand名がapiDataに含まれているか検索
+    const filterBrand: apiData[] = values.filter(x => (x.Brand === memoryBrandEle.value ? x : ''));
 
-    const filterModel = filterBrand.filter(x => (x.Model.indexOf(`${memoryNum}x`) !== -1 ? x.Model : ''));
+    // Model名にmemoryQuantityIdで選択したメモリモジュールが含まれているモノを検索する
+    const filterModel = filterBrand.filter(x => (x.Model.indexOf(`${memoryNumEle.value}x`) !== -1 ? x.Model : ''));
 
-    this.#value = filterModel;
+    this.value = filterModel;
   }
 
-  getModel() {
-    return this.#value;
+  /**
+   * ゲッター
+   */
+  getModel(): apiData[] {
+    return this.value;
   }
 }
 
