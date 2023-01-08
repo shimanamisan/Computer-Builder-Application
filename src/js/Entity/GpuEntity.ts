@@ -1,27 +1,25 @@
 class GpuEntity {
-  #gpu;
+  private gpu: apiData[];
 
   /**
-   *
-   * @param {*} apiData
-   * @param {*} gpuEntity
+   * コンストラクタ
+   * @param apiData api から取得したデータ
+   * @param gpuEntity GpuEntity オブジェクト
    */
-  constructor(apiData, gpuEntity) {
-    if (apiData instanceof Array) {
-      if (apiData.length === 0) throw 'An invalid argument was assigned.';
-    }
+  constructor(apiData: apiData[], gpuEntity: GpuEntity) {
+    if (apiData.length === 0) throw 'An invalid argument was assigned.';
 
-    if (gpuEntity !== null && gpuEntity instanceof GpuEntity) {
-      this.#gpu = apiData;
-    }
+    if (gpuEntity === null) throw 'An invalid argument was assigned.';
+
+    this.gpu = apiData;
   }
 
   /**
-   *
-   * @returns
+   * ゲッター
+   * @returns apiData[]
    */
-  getGpu() {
-    return this.#gpu;
+  getGpu(): apiData[] {
+    return this.gpu;
   }
 }
 
