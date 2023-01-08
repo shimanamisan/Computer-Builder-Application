@@ -17,9 +17,6 @@ const ESLintPlugin = require('eslint-webpack-plugin');
 // jsファイルとcssファイルを分割するためのプラグイン
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-// web-pack-dev-server は静的にファイルを出力するためのプラグイン
-const WriteFilePlugin = require('write-file-webpack-plugin');
-
 module.exports = {
   entry: './src/js/index.ts',
   output: {
@@ -34,22 +31,9 @@ module.exports = {
       {
         // 拡張子 .ts の場合
         test: /\.ts$/,
-        // ローダーの処理対象から除外するディレクトリを指定
-        exclude: /node_modules/,
         // TypeScript をコンパイルする
         use: 'ts-loader',
       },
-      // *********************************
-      // * JSファイルに対する設定（主にBabel）
-      // *********************************
-      // {
-      //   // ローダーの処理対象を指定
-      //   test: /\.js$/,
-      //   // ローダーの処理対象から除外するディレクトリを指定
-      //   exclude: /node_modules/,
-      //   loader: 'babel-loader',
-      //   // ローダーに対する設定は babel.config.js というファイルに切り出して設定する
-      // },
       // ***********************
       // * css, scssに関する設定
       // ***********************
@@ -93,7 +77,6 @@ module.exports = {
     new ESLintPlugin({
       fix: true, // 一部のエラーを自動で修正する
     }),
-    new WriteFilePlugin(),
   ],
   // 最適化（webpack4から導入された）
   optimization: {

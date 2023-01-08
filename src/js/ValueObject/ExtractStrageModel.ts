@@ -1,28 +1,36 @@
 class ExtractStrageModel {
-  #values;
+  private values: apiData[];
 
-  constructor(size, brand, array) {
-    if (size === '' || brand === '' || array.length === 0) {
+  /**
+   * コンストラクタ
+   * @param storageSizeValue ストレージサイズ
+   * @param storageBrandValue ブランド名
+   * @param apiData api から取得したデータ
+   */
+  constructor(storageSizeValue: string, storageBrandValue: string, apiData: apiData[]) {
+    if (storageSizeValue === '' || storageSizeValue === '' || apiData.length === 0) {
       throw 'An invalid argument was assigned.';
     }
-
-    const matchDataForSize = [];
-    const matchDataForBrand = [];
+    const matchDataForSize: apiData[] = [];
+    const matchDataForBrand: apiData[] = [];
 
     // サイズ（TBかGB）の文字列を含んでいるModelのデータを抽出
-    for (let i = 0; i < array.length; i++) {
-      if (array[i].Model.indexOf(size) !== -1) matchDataForSize.push(array[i]);
+    for (let i = 0; i < apiData.length; i++) {
+      if (apiData[i].Model.indexOf(storageSizeValue) !== -1) matchDataForSize.push(apiData[i]);
     }
 
     for (let i = 0; i < matchDataForSize.length; i++) {
-      if (matchDataForSize[i].Brand.indexOf(brand) !== -1) matchDataForBrand.push(matchDataForSize[i]);
+      if (matchDataForSize[i].Brand.indexOf(storageBrandValue) !== -1) matchDataForBrand.push(matchDataForSize[i]);
     }
 
-    this.#values = matchDataForBrand;
+    this.values = matchDataForBrand;
   }
 
-  getModel() {
-    return this.#values;
+  /**
+   * ゲッター
+   */
+  getModel(): apiData[] {
+    return this.values;
   }
 }
 

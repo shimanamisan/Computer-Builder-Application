@@ -1,5 +1,5 @@
 import GetApiData from '../Model/GetApiData';
-import StorageViews from '../Viwes/StorageViews';
+import StorageViews from '../Views/StorageViews';
 import ExtractStrageSize from '../ValueObject/ExtractStrageSize';
 import InputChange from './EventController/InputChange';
 import ExtractBrandFromSize from '../ValueObject/ExtractBrandFromSize';
@@ -8,52 +8,56 @@ import StorageEntity from '../Entity/StorageEntity';
 
 class StorageSectionController {
   /**
-   *
+   * ストレージのタイプを描画する
    */
-  static async strageTypeElement() {
-    const hddType = await GetApiData.execution('hdd');
-    const ssdType = await GetApiData.execution('ssd');
-    const mergeArry = hddType.concat(ssdType);
-    const hashMap = {};
+  static async strageTypeElement(): Promise<void> {
+    const hddType: apiData[] = await GetApiData.execution('hdd');
+    const ssdType: apiData[] = await GetApiData.execution('ssd');
+    const mergeArry: apiData[] = hddType.concat(ssdType);
+    // INFO: https://qiita.com/coa00/items/3be7f1237a1628ec3eb4
+    // HashMapの書き方
+    const hashMap: { [key: string]: string } = {};
 
     for (let i = 0; i < mergeArry.length; i++) {
       if (hashMap[mergeArry[i].Type] === undefined) hashMap[mergeArry[i].Type] = mergeArry[i].Type;
       if (hashMap[mergeArry[i].Type] === undefined) hashMap[mergeArry[i].Type] = mergeArry[i].Type;
     }
 
-    const storageTypeLists = Object.keys(hashMap);
+    const storageTypeLists: string[] = Object.keys(hashMap);
 
-    const storageTypeEle = document.getElementById(StorageViews.storageTypeId);
+    const storageTypeEle: HTMLElement = document.getElementById(StorageViews.storageTypeId)!;
 
     storageTypeEle.innerHTML = `<option selected value="-">-</option>`;
     for (let i = 0; i < storageTypeLists.length; i++) {
       storageTypeEle.innerHTML += `<option value="${storageTypeLists[i]}">${storageTypeLists[i]}</option>`;
     }
 
+    // ストレージタイプの select 要素を選択したら発火するイベントを登録
     InputChange.addEvent(
-      document.getElementById(StorageViews.storageTypeId),
+      document.getElementById(StorageViews.storageTypeId)!,
       StorageSectionController.storageSizeElements
     );
   }
 
   /**
-   *
-   * @returns
+   * storageSizeElement の select 要素が選択されたときのイベントの処理
+   * @returns Promise<void>
    */
-  static async storageSizeElements() {
-    const storageSizeEle = document.getElementById(StorageViews.storageSizeId);
-    const storageType = document.getElementById(StorageViews.storageTypeId).value.toLowerCase();
+  static async storageSizeElements(): Promise<void> {
+    const storageSizeEle: HTMLElement = document.getElementById(StorageViews.storageSizeId)!;
+    const storageTypeEle: HTMLSelectElement = document.getElementById(StorageViews.storageTypeId)! as HTMLSelectElement;
+    const strageTypeValue: string = storageTypeEle.value.toLowerCase();
 
-    if (storageType === '-') {
+    if (strageTypeValue === '-') {
       storageSizeEle.innerHTML = `<option selected value="-">-</option>`;
       return;
     }
 
-    const apiData = await GetApiData.execution(storageType);
+    const apiData: apiData[] = await GetApiData.execution(strageTypeValue);
 
     // ストレージのサイズの文字列を切り出した配列を格納したValueObject（ソート済み）
-    const strageSizeValueObject = new ExtractStrageSize(apiData);
-    const strageSizeLists = strageSizeValueObject.getStrageSize();
+    const strageSizeValueObject: ExtractStrageSize = new ExtractStrageSize(apiData);
+    const strageSizeLists: string[] = strageSizeValueObject.getStrageSize();
 
     storageSizeEle.innerHTML = `<option selected value="-">-</option>`;
     for (let i = 0; i < strageSizeLists.length; i++) {
@@ -64,18 +68,21 @@ class StorageSectionController {
   }
 
   /**
-   * ストレージのサイズが選択されたらBrand要素を追加する
-   * @returns
+   * addStorageBrandElement の select 要素が選択されたときのイベントの処理
    */
-  static async addStorageBrandElement() {
-    const storageType = document.getElementById(StorageViews.storageTypeId).value.toLowerCase();
-    const stoageSize = document.getElementById(StorageViews.storageSizeId).value;
-    const storageBrandEle = document.getElementById(StorageViews.storageBrandId);
+  static async addStorageBrandElement(): Promise<void> {
+    const storageTypeEle: HTMLSelectElement = document.getElementById(StorageViews.storageTypeId) as HTMLSelectElement;
+    const storageTypeValue: string = storageTypeEle.value.toLowerCase();
 
-    const apiData = await GetApiData.execution(storageType);
+    const stoageSizeEle: HTMLSelectElement = document.getElementById(StorageViews.storageSizeId) as HTMLSelectElement;
+    const stoageSizeValue = stoageSizeEle.value;
 
-    const brandValueObject = new ExtractBrandFromSize(stoageSize, apiData);
-    const storageBrandLists = brandValueObject.getBrands();
+    const storageBrandEle: HTMLElement = document.getElementById(StorageViews.storageBrandId)!;
+
+    const apiData: apiData[] = await GetApiData.execution(storageTypeValue);
+
+    const brandValueObject: ExtractBrandFromSize = new ExtractBrandFromSize(stoageSizeValue, apiData);
+    const storageBrandLists: string[] = brandValueObject.getBrands();
 
     storageBrandEle.innerHTML = `<option selected value="-">-</option>`;
     for (let i = 0; i < storageBrandLists.length; i++) {
@@ -86,39 +93,53 @@ class StorageSectionController {
   }
 
   /**
-   *
+   * storageModel の select 要素が選択されたときのイベントの処理
    */
-  static async addStargeModelElement() {
-    const storageType = document.getElementById(StorageViews.storageTypeId).value.toLowerCase();
-    const storageSize = document.getElementById(StorageViews.storageSizeId).value;
-    const storageBrand = document.getElementById(StorageViews.storageBrandId).value;
-    const storageModelEle = document.getElementById(StorageViews.storageModelId);
+  static async addStargeModelElement(): Promise<void> {
+    const storageTypeEle: HTMLSelectElement = document.getElementById(StorageViews.storageTypeId)! as HTMLSelectElement;
+    const storageTypeValue: string = storageTypeEle.value.toLowerCase();
 
-    const apiData = await GetApiData.execution(storageType);
-    const storageModelValueObject = new ExtractStrageModel(storageSize, storageBrand, apiData);
+    const storageSizeEle: HTMLSelectElement = document.getElementById(StorageViews.storageSizeId)! as HTMLSelectElement;
+    const storageSizeValue: string = storageSizeEle.value;
 
-    const strageModels = storageModelValueObject.getModel();
+    const storageBrandEle: HTMLSelectElement = document.getElementById(
+      StorageViews.storageBrandId
+    )! as HTMLSelectElement;
+    const storageBrandValue: string = storageBrandEle.value;
+
+    const storageModelEle: HTMLElement = document.getElementById(StorageViews.storageModelId)!;
+
+    const apiData: apiData[] = await GetApiData.execution(storageTypeValue);
+    const storageModelValueObject = new ExtractStrageModel(storageSizeValue, storageBrandValue, apiData);
+
+    const strageModels: apiData[] = storageModelValueObject.getModel();
 
     storageModelEle.innerHTML = `<option selected value="-">-</option>`;
     for (let i = 0; i < strageModels.length; i++) {
       storageModelEle.innerHTML += `<option value="${strageModels[i].Model}">${strageModels[i].Model}</option>`;
     }
 
-    InputChange.addEvent(storageModelEle, function (event) {
+    InputChange.addEvent(storageModelEle, function (event: Event) {
       StorageSectionController.addComputerEntity(strageModels, event);
     });
   }
 
   /**
-   *
-   * @param {*} storageModelData
-   * @param {*} event
-   * @returns
+   * StorageEntity に計算用のデータを登録
+   * @param storageModelData api から取得したデータ
+   * @param event イベントオブジェクト
+   * @returns void
    */
-  static addComputerEntity(storageModelData, event) {
-    if (event.target.value === '-') return;
+  static addComputerEntity(storageModelData: apiData[], event: Event): void {
+    // 必ずHTMLSelectElementが来るわけではないからType Guardを実装
+    if (!(event.currentTarget instanceof HTMLSelectElement)) return;
 
-    const selectStorageModelData = storageModelData.filter(x => (x.Model === event.target.value ? x : ''));
+    if (event.currentTarget.value === '-') return;
+
+    const eventTarget: HTMLSelectElement = event.currentTarget!;
+    const currentValue: string = eventTarget.value;
+
+    const selectStorageModelData: apiData[] = storageModelData.filter(x => (x.Model === currentValue ? x : ''));
 
     window.StorageEntity = new StorageEntity(selectStorageModelData, window.StorageEntity);
   }

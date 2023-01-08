@@ -1,14 +1,14 @@
 class MemoryViews {
   // このViewクラスで使用しているID要素名
-  static memoryQuantityId = 'memoryQuantity';
-  static memoryBrandId = 'memoryBrand';
-  static memoryModelId = 'memoryModel';
+  static memoryQuantityId: string = 'memoryQuantity';
+  static memoryBrandId: string = 'memoryBrand';
+  static memoryModelId: string = 'memoryModel';
 
   /**
    * HTML要素の雛形を返す
-   * @returns {string} - HTML要素を返す
+   * @returns HTMLの文字列を返す
    */
-  static createStringHTML() {
+  static createStringHTML(): string {
     return `
     <div class="m-2 pt-3">
     <h4>step3: Select Your Memory Card <i class="fa-solid fa-memory"></i></h4>

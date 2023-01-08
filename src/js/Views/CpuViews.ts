@@ -1,12 +1,13 @@
 class CpuViews {
-  static cpuBrandId = 'cpuBrand';
-  static cpuModelId = 'cpuModel';
+  // このViewクラスで使用しているID要素名
+  static cpuBrandId: string = 'cpuBrand';
+  static cpuModelId: string = 'cpuModel';
 
   /**
    * HTML要素の雛形を返す
-   * @returns {string} - HTML要素を返す
+   * @returns HTMLの文字列を返す
    */
-  static createStringHTML() {
+  static createStringHTML(): string {
     return `
     <div class="m-2 pt-3">
       <h4>step1: Select Your CPU <i class="fa-solid fa-microchip"></i></h4>

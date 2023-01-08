@@ -1,27 +1,25 @@
 class StorageEntity {
-  #storage;
+  private storage: apiData[];
 
   /**
-   *
-   * @param {*} apiData
-   * @param {*} storageEntity
+   * コンストラクタ
+   * @param apiData api から取得したデータ
+   * @param storageEntity StorageEntity オブジェクト
    */
-  constructor(apiData, storageEntity) {
-    if (apiData instanceof Array) {
-      if (apiData.length === 0) throw 'An invalid argument was assigned.';
-    }
+  constructor(apiData: apiData[], storageEntity: StorageEntity) {
+    if (apiData.length === 0) throw 'An invalid argument was assigned.';
 
-    if (storageEntity !== null && storageEntity instanceof StorageEntity) {
-      this.#storage = apiData;
-    }
+    if (storageEntity === null) throw 'An invalid argument was assigned.';
+
+    this.storage = apiData;
   }
 
   /**
-   *
-   * @returns
+   * ゲッター
+   * @returns apiData[]
    */
-  getStorage() {
-    return this.#storage;
+  getStorage(): apiData[] {
+    return this.storage;
   }
 }
 

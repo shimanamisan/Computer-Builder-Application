@@ -1,9 +1,12 @@
+// エラー1
+// Cannot find module 'swiper'. Did you mean to set the 'moduleResolution' option to 'nodenext', or to add aliases to the 'paths' option?
+// swiper.d.ts で swiper の定義ファイルを追加
 import Swiper, { Navigation, Pagination, Scrollbar } from 'swiper';
-import CpuViews from '../Viwes/CpuViews';
-import GpuViews from '../Viwes/GpuViews';
-import MemoryViews from '../Viwes/MemoryViews';
-import StorageViews from '../Viwes/StorageViews';
-import BuildComputerViews from '../Viwes/BuildComputerViews';
+import CpuViews from '../Views/CpuViews';
+import GpuViews from '../Views/GpuViews';
+import MemoryViews from '../Views/MemoryViews';
+import StorageViews from '../Views/StorageViews';
+import BuildComputerViews from '../Views/BuildComputerViews';
 import ExtractGameBenchMarkScore from '../ValueObject/ExtractGameBenchMarkScore';
 import ExtractWorkBenchMarkScore from '../ValueObject/ExtractWorkBenchMarkScore';
 
@@ -12,26 +15,26 @@ class CreateComputerController {
    *
    * @returns
    */
-  static async createHtml() {
+  static async createHtml(): Promise<void> {
     const isValid = CreateComputerController.formValidation();
 
     if (isValid) return;
 
-    const calcuGameScore = new ExtractGameBenchMarkScore(
+    const calcuGameScore: ExtractGameBenchMarkScore = new ExtractGameBenchMarkScore(
       window.CpuEntity.getCpu(),
       window.GpuEntity.getGpu(),
       window.MemoryEntity.getMemory(),
       window.StorageEntity.getStorage()
     );
 
-    const calcuWrokScore = new ExtractWorkBenchMarkScore(
+    const calcuWrokScore: ExtractWorkBenchMarkScore = new ExtractWorkBenchMarkScore(
       window.CpuEntity.getCpu(),
       window.GpuEntity.getGpu(),
       window.MemoryEntity.getMemory(),
       window.StorageEntity.getStorage()
     );
 
-    const target = document.getElementById('target');
+    const target = document.getElementById('target')!;
 
     if (document.getElementById('buildComputerArea') === null) {
       const container = document.createElement('div');
@@ -40,7 +43,7 @@ class CreateComputerController {
       target.append(container);
     }
 
-    const buildComputerArea = document.getElementById('buildComputerArea');
+    const buildComputerArea = document.getElementById('buildComputerArea')!;
     buildComputerArea.innerHTML = ``;
 
     const sliderContainerHtml = BuildComputerViews.createSliderContainerHtml();
@@ -70,32 +73,36 @@ class CreateComputerController {
    *
    * @returns
    */
-  static formValidation() {
-    const cpuBrand = document.getElementById(CpuViews.cpuBrandId).value;
-    const cpuModel = document.getElementById(CpuViews.cpuModelId).value;
-    const gpuBrand = document.getElementById(GpuViews.gpuBrandId).value;
-    const gpuModel = document.getElementById(GpuViews.gpuModelId).value;
-    const memoryQuantity = document.getElementById(MemoryViews.memoryQuantityId).value;
-    const memoryBrand = document.getElementById(MemoryViews.memoryBrandId).value;
-    const memoryModel = document.getElementById(MemoryViews.memoryModelId).value;
-    const strageType = document.getElementById(StorageViews.storageTypeId).value;
-    const strageSize = document.getElementById(StorageViews.storageSizeId).value;
-    const strageBrand = document.getElementById(StorageViews.storageBrandId).value;
-    const strageModel = document.getElementById(StorageViews.storageModelId).value;
+  static formValidation(): boolean {
+    // プロパティ '〇〇' は型 'HTMLElement' に存在しません。
+    // INFO: https://www.azukipan.com/posts/typescript-error-htmlelement/
+    // 型アサーションを指定する
+    // <HTMLInputElement>document.getElementById か document.getElementById(CpuViews.cpuBrandId)! as HTMLInputElement; と記述する
+    const cpuBrand = document.getElementById(CpuViews.cpuBrandId)! as HTMLInputElement;
+    const cpuModel = document.getElementById(CpuViews.cpuModelId)! as HTMLInputElement;
+    const gpuBrand = document.getElementById(GpuViews.gpuBrandId)! as HTMLInputElement;
+    const gpuModel = document.getElementById(GpuViews.gpuModelId)! as HTMLInputElement;
+    const memoryQuantity = document.getElementById(MemoryViews.memoryQuantityId)! as HTMLInputElement;
+    const memoryBrand = document.getElementById(MemoryViews.memoryBrandId)! as HTMLInputElement;
+    const memoryModel = document.getElementById(MemoryViews.memoryModelId)! as HTMLInputElement;
+    const strageType = document.getElementById(StorageViews.storageTypeId)! as HTMLInputElement;
+    const strageSize = document.getElementById(StorageViews.storageSizeId)! as HTMLInputElement;
+    const strageBrand = document.getElementById(StorageViews.storageBrandId)! as HTMLInputElement;
+    const strageModel = document.getElementById(StorageViews.storageModelId)! as HTMLInputElement;
 
     // 全ての入力フォームが入力されていたら結果を出力する
     if (
-      !CreateComputerController.isFormEmpty(cpuBrand) ||
-      !CreateComputerController.isFormEmpty(cpuModel) ||
-      !CreateComputerController.isFormEmpty(gpuBrand) ||
-      !CreateComputerController.isFormEmpty(gpuModel) ||
-      !CreateComputerController.isFormEmpty(memoryQuantity) ||
-      !CreateComputerController.isFormEmpty(memoryBrand) ||
-      !CreateComputerController.isFormEmpty(memoryModel) ||
-      !CreateComputerController.isFormEmpty(strageType) ||
-      !CreateComputerController.isFormEmpty(strageSize) ||
-      !CreateComputerController.isFormEmpty(strageBrand) ||
-      !CreateComputerController.isFormEmpty(strageModel)
+      !CreateComputerController.isFormEmpty(cpuBrand.value) ||
+      !CreateComputerController.isFormEmpty(cpuModel.value) ||
+      !CreateComputerController.isFormEmpty(gpuBrand.value) ||
+      !CreateComputerController.isFormEmpty(gpuModel.value) ||
+      !CreateComputerController.isFormEmpty(memoryQuantity.value) ||
+      !CreateComputerController.isFormEmpty(memoryBrand.value) ||
+      !CreateComputerController.isFormEmpty(memoryModel.value) ||
+      !CreateComputerController.isFormEmpty(strageType.value) ||
+      !CreateComputerController.isFormEmpty(strageSize.value) ||
+      !CreateComputerController.isFormEmpty(strageBrand.value) ||
+      !CreateComputerController.isFormEmpty(strageModel.value)
     ) {
       alert('全ての項目を入力して下さい。');
       return true;
@@ -106,12 +113,11 @@ class CreateComputerController {
 
   /**
    *
-   * @param {*} value
+   * @param value
    * @returns
    */
-  static isFormEmpty(value) {
+  static isFormEmpty(value: string): boolean {
     if (value === '-' || value === '' || value === undefined) return false;
-
     return true;
   }
 }

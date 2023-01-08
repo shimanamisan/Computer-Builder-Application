@@ -1,14 +1,15 @@
 class StorageViews {
-  static storageTypeId = 'storageType';
-  static storageSizeId = 'storageSize';
-  static storageBrandId = 'storageBrand';
-  static storageModelId = 'storageModel';
+  // このViewクラスで使用しているID要素名
+  static storageTypeId: string = 'storageType';
+  static storageSizeId: string = 'storageSize';
+  static storageBrandId: string = 'storageBrand';
+  static storageModelId: string = 'storageModel';
 
   /**
    * HTML要素の雛形を返す
-   * @returns {string} - HTML要素を返す
+   * @returns HTMLの文字列を返す
    */
-  static createStringHTML() {
+  static createStringHTML(): string {
     return `
       <div class="d-md-flex d-flex flex-column">
         <div class="m-2 pt-3">

@@ -1,27 +1,25 @@
 class MemoryEntity {
-  #memory;
+  private memory: apiData[];
 
   /**
-   *
-   * @param {*} apiData
-   * @param {*} memoryEntity
+   * コンストラクタ
+   * @param apiData api から取得したデータ
+   * @param memoryEntity MemoryEntity オブジェクト
    */
-  constructor(apiData, memoryEntity) {
-    if (apiData instanceof Array) {
-      if (apiData.length === 0) throw 'An invalid argument was assigned.';
-    }
+  constructor(apiData: apiData[], memoryEntity: MemoryEntity) {
+    if (apiData.length === 0) throw 'An invalid argument was assigned.';
 
-    if (memoryEntity !== null && memoryEntity instanceof MemoryEntity) {
-      this.#memory = apiData;
-    }
+    if (memoryEntity === null) throw 'An invalid argument was assigned.';
+
+    this.memory = apiData;
   }
 
   /**
-   *
-   * @returns
+   * ゲッター
+   * @returns apiData[]
    */
-  getMemory() {
-    return this.#memory;
+  getMemory(): apiData[] {
+    return this.memory;
   }
 }
 

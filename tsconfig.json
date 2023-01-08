@@ -1,12 +1,18 @@
 {
   "compilerOptions": {
+    "lib": ["ESNext", "DOM"],
     // ソースマップを有効化
     "sourceMap": true,
-    // TSはECMAScript 5に変換
-    "target": "ES5",
-    // TSのモジュールはES Modulesとして出力
-    "module": "ES2015",
-    // 厳密モードとして設定
-    "strict": true
-  }
+    "target": "ES2017",
+    "module": "ES2022",
+    "strict": true,
+    "paths": {
+      "*": ["./src/@types/*"]
+    },
+    "moduleResolution": "node",
+    // 暗黙的にanyになる値をエラーにする
+    "noImplicitAny": true
+  },
+  "exclude": ["node_modules"],
+  "includes": ["src/**/*.ts"]
 }
