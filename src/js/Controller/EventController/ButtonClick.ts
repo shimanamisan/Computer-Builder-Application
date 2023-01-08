@@ -1,10 +1,10 @@
 class ButtonClick {
   /**
    * button要素にクリックイベントを登録する
-   * @param {*} buttonElement
-   * @param {*} func
+   * @param buttonElement
+   * @param func
    */
-  static addEvent(buttonElement, func) {
+  static addEvent(buttonElement: any, func: (event: Event) => void) {
     buttonElement.addEventListener('click', func);
   }
 }
