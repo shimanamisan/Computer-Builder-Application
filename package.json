@@ -1,5 +1,5 @@
 {
-  "name": "webpack-web-coding",
+  "name": "computer-builder-application",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -8,7 +8,8 @@
     "start": "webpack-dev-server --config webpack.config.dev.js",
     "dev": "webpack --config webpack.config.dev.js",
     "prod": "webpack --config webpack.config.prod.js",
-    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,html,scss}\""
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,html,scss}\"",
+    "typedoc": "typedoc --exclude '**/*index.ts' --entryPointStrategy expand './src'"
   },
   "devDependencies": {
     "@babel/core": "^7.11.6",
@@ -45,6 +46,7 @@
     "jquery": "^3.6.1",
     "node-fetch": "^3.3.0",
     "regenerator-runtime": "^0.13.9",
-    "swiper": "^8.4.5"
+    "swiper": "^8.4.5",
+    "typedoc": "^0.23.24"
   }
 }
