@@ -20,7 +20,6 @@ class BuildComputerViews {
 
   /**
    * HTML要素の雛形を返す
-   * @returns HTMLの文字列を返す
    */
   static createSliderContainerHtml(): string {
     const htmlStr: string = `
@@ -38,8 +37,8 @@ class BuildComputerViews {
 
   /**
    * 計算結果のHTML文字列をスライダー要素のElementに格納する
-   * @param calcuGameScore 
-   * @param calcuWrokScore 
+   * @param calcuGameScore ExtractGameBenchMarkScore オブジェクト
+   * @param calcuWrokScore ExtractWorkBenchMarkScore オブジェクト
    */
   static createStringInnerHTML(calcuGameScore: ExtractGameBenchMarkScore, calcuWrokScore: ExtractWorkBenchMarkScore) {
     const buildSliderArea: HTMLElement = document.getElementById(this.buildSliderAreaId)!;
