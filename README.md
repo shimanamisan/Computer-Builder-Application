@@ -34,6 +34,7 @@ Recursion Project4 -Computer Builder-
 - できるだけ単一責務のクラスを意識して実装
 - 値の処理は ValueObject にまとめて不変になるように意識
 - typedoc でコードからドキュメントが作成されるようにした
+  - [https://shimanamisan.github.io/Computer-Builder-Application/modules.html](https://shimanamisan.github.io/Computer-Builder-Application/modules.html)
 
 # Improvements
 
