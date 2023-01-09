@@ -11,7 +11,9 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 // HTMLテンプレートからバンドルファイルを読み込んだHTMLファイルを出力するプラグイン
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+// INFO: https://github.com/webpack-contrib/eslint-webpack-plugin
 // ESLintを使用するためのプラグイン
+// eslint-loader ではなくこちらのプラグインを使用する
 const ESLintPlugin = require('eslint-webpack-plugin');
 
 // jsファイルとcssファイルを分割するためのプラグイン
@@ -31,11 +33,9 @@ module.exports = {
       {
         // 拡張子 .ts の場合
         test: /\.ts$/,
-        // TypeScript をコンパイルする
-        use: 'ts-loader',
-        exclude: /node_modules/,
         // BabelでTypeScriptをES5にトランスパイする
-        use: ["babel-loader"],
+        use: 'babel-loader',
+        exclude: /node_modules/,
       },
       // ***********************
       // * css, scssに関する設定
@@ -48,14 +48,19 @@ module.exports = {
       // * 画像ファイルに関する設定
       // ***********************
       {
-        // webpack 5からurl-loader/file-loader/raw-loaderが要らなくなった
         // 拡張子の大文字も許容するように最後尾に i を加える
         // jpegとjpgの様にeがあるかないかを許容するのに、jpe?gという形式にする
-        test: /\.(jpe?g|png|svg|gif|ico|webp)$/i,
+        test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
         type: 'asset/resource',
         generator: {
-          filename: 'images/[name][ext]',
+          // [name]は元のファイル名
+          filename: 'images/[name].[ext]',
         },
+      },
+      {
+        // フォントSVGファイルなどインライン化するファイル
+        test: /\.(woff(2)?|eot|ttf|otf|svg|)$/,
+        type: 'asset/inline',
       },
     ],
   },
@@ -81,7 +86,6 @@ module.exports = {
       fix: true, // 一部のエラーを自動で修正する
     }),
   ],
-  // 最適化（webpack4から導入された）
   optimization: {
     minimizer: [
       // CSSの冗長な記述を最適化して出力する
@@ -92,7 +96,7 @@ module.exports = {
     // エイリアスを指定
     alias: {
       '@js': `${src}/js`,
-      '@img': `${src}/images`,
+      '@iamge': `${src}/images`,
       '@scss': `${src}/scss`,
     },
     // importするときのファイル名から拡張子部分を省略できるようになる
