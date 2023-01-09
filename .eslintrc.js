@@ -16,11 +16,11 @@ module.exports = {
   // extendsで指定したルールと重複した場合はこちらの設定が有効になる
   rules: {
     'no-console': 'off',
-    'prefer-const': 'error', // 更新をしない変数にconst以外が指定されていたらエラーが発生するルール
+    'prefer-const': 'error', // 更新をしない変数の宣言にconst以外が指定されていたらエラーが発生するルール
     indent: ['error', 2],
     semi: ['error', 'always'],
   },
   parserOptions: {
-    // sourceType: 'module', // import, export などのesmodulesの構文を利用してもエラーとならない
+    sourceType: 'module', // import, export などのesmodulesの構文を利用してもエラーとならない
   },
 };
