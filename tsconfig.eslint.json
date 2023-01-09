@@ -1,0 +1,8 @@
+{
+  // 継承する設定内容が記述されているconfigファイルを指定する
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "allowJs": true
+  },
+  "include": ["src", ".*.js"]
+}
