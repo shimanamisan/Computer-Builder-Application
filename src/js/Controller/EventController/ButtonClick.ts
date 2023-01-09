@@ -4,7 +4,7 @@ class ButtonClick {
    * @param buttonElement
    * @param func
    */
-  static addEvent(buttonElement: any, func: (event: Event) => void) {
+  static addEvent(buttonElement: HTMLElement, func: (event: Event) => void) {
     buttonElement.addEventListener('click', func);
   }
 }
