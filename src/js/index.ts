@@ -2,6 +2,7 @@ import '@fortawesome/fontawesome-free/js/fontawesome';
 import '@fortawesome/fontawesome-free/js/solid';
 import '@fortawesome/fontawesome-free/js/regular';
 import '@scss/style.scss';
+import '@iamge/ogp.png';
 // import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -69,7 +70,7 @@ class App {
       StorageSectionController.storageSizeElements
     );
 
-    ButtonClick.addEvent(document.getElementById(ButtonViews.addPcButtonId), CreateComputerController.createHtml);
+    ButtonClick.addEvent(document.getElementById(ButtonViews.addPcButtonId)!, CreateComputerController.createHtml);
   }
 }
 
