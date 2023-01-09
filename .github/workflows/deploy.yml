@@ -15,7 +15,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16.x
-      - run: yarn install && yarn run prod
+      - run: yarn install && yarn run lint && yarn run prod
       - name: deploy to server
         uses: burnett01/rsync-deployments@5.2.1
         with:
