@@ -1,7 +1,7 @@
 class GpuViews {
   // このViewクラスで使用しているID要素名
-  static gpuBrandId: string = 'gpuBrand';
-  static gpuModelId: string = 'gpuModel';
+  static gpuBrandId = 'gpuBrand';
+  static gpuModelId = 'gpuModel';
 
   /**
    * HTML要素の雛形を返す

@@ -2,11 +2,11 @@ class ExtractGameBenchMarkScore {
   /**
    * ベンチマークの計算レート
    */
-  private GAME_CPU: number = 0.25;
-  private GAME_GPU: number = 0.6;
-  private GAME_MEMORY: number = 0.125;
-  private GAME_HDD_STORAGE: number = 0.025;
-  private GAME_SSD_STORAGE: number = 0.1;
+  private GAME_CPU = 0.25;
+  private GAME_GPU = 0.6;
+  private GAME_MEMORY = 0.125;
+  private GAME_HDD_STORAGE = 0.025;
+  private GAME_SSD_STORAGE = 0.1;
 
   /**
    * 各種 api データ

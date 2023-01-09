@@ -1,8 +1,8 @@
 class ExtractWorkBenchMarkScore {
-  private WORK_CPU: number = 0.6;
-  private WORK_GPU: number = 0.25;
-  private WORK_MEMORY: number = 0.1;
-  private WORK_STORAGE: number = 0.05;
+  private WORK_CPU = 0.6;
+  private WORK_GPU = 0.25;
+  private WORK_MEMORY = 0.1;
+  private WORK_STORAGE = 0.05;
 
   private cpu: apiData[];
   private gpu: apiData[];

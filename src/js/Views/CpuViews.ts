@@ -1,7 +1,7 @@
 class CpuViews {
   // このViewクラスで使用しているID要素名
-  static cpuBrandId: string = 'cpuBrand';
-  static cpuModelId: string = 'cpuModel';
+  static cpuBrandId = 'cpuBrand';
+  static cpuModelId = 'cpuModel';
 
   /**
    * HTML要素の雛形を返す

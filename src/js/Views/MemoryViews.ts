@@ -1,8 +1,8 @@
 class MemoryViews {
   // このViewクラスで使用しているID要素名
-  static memoryQuantityId: string = 'memoryQuantity';
-  static memoryBrandId: string = 'memoryBrand';
-  static memoryModelId: string = 'memoryModel';
+  static memoryQuantityId = 'memoryQuantity';
+  static memoryBrandId = 'memoryBrand';
+  static memoryModelId = 'memoryModel';
 
   /**
    * HTML要素の雛形を返す

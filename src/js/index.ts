@@ -75,7 +75,7 @@ class App {
 }
 
 /**
- * トップレベルの 'await' 式は、'module' オプションが 'es2022'、'esnext'、'system'、'node16'　または 'nodenext' に設定されていて、
+ * トップレベルの 'await' 式は、'module' オプションが 'es2022'、'esnext'、'system'、'node16' または 'nodenext' に設定されていて、
  * 'target' オプションが 'es2017' 以上に設定されている場合にのみ使用できます。
  */
 await App.createTopView();
