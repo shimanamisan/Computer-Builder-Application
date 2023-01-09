@@ -22,7 +22,7 @@ class BuildComputerViews {
    * HTML要素の雛形を返す
    */
   static createSliderContainerHtml(): string {
-    const htmlStr: string = `
+    const htmlStr = `
       <div class="swiper mySwiper">
         <div id="buildSliderArea" class="swiper-wrapper container-md mt-4 p-md-3 p-builder__container">
         </div>
@@ -54,7 +54,7 @@ class BuildComputerViews {
     const storageBrandEle: HTMLSelectElement = document.getElementById(this.storageBrandId)! as HTMLSelectElement;
     const storageModelEle: HTMLSelectElement = document.getElementById(this.storageModelId)! as HTMLSelectElement;
 
-    const htmlStr: string = `
+    const htmlStr = `
       <div class="swiper-slide">
         <h1 class="text-center" id="pcNumber"></h1>
         <div class="col-md-8 m-auto">

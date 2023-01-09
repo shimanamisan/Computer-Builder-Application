@@ -1,9 +1,9 @@
 class StorageViews {
   // このViewクラスで使用しているID要素名
-  static storageTypeId: string = 'storageType';
-  static storageSizeId: string = 'storageSize';
-  static storageBrandId: string = 'storageBrand';
-  static storageModelId: string = 'storageModel';
+  static storageTypeId = 'storageType';
+  static storageSizeId = 'storageSize';
+  static storageBrandId = 'storageBrand';
+  static storageModelId = 'storageModel';
 
   /**
    * HTML要素の雛形を返す

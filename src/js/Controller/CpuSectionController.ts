@@ -17,7 +17,7 @@ class CpuSectionController {
     element.innerHTML += `<option selected value="-">-</option>`;
 
     for (let i = 0; i < uniqueData.length; i++) {
-      let brandName: string = uniqueData[i].Brand;
+      const brandName: string = uniqueData[i].Brand;
       element.innerHTML += `<option value="${brandName}">${brandName}</option>`;
     }
   }

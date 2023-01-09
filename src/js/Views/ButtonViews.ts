@@ -1,6 +1,6 @@
 class ButtonViews {
   // このViewクラスで使用しているID要素名
-  static addPcButtonId: string = 'add-pc-button';
+  static addPcButtonId = 'add-pc-button';
 
   /**
    * HTML要素の雛形を返す
