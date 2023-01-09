@@ -54,7 +54,7 @@ module.exports = {
         type: 'asset/resource',
         generator: {
           // [name]は元のファイル名
-          filename: 'images/[name].[ext]',
+          filename: 'images/[name][ext]',
         },
       },
       {
